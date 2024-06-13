@@ -1,0 +1,23 @@
+<div class="main-content-without-slidebar">
+    <header class="welcome-header">
+      <%= image_tag 'logo0.png', class: 'logo' %>
+      <h2><%= t('home.welcome.title')%></h2>
+      <h3><%= t('home.welcome.description') %></h3>
+    </header>
+
+  <div class="main-content2">
+    <div class="welcome-actions">
+      <%= link_to t('home.welcome.sign_up'), new_user_registration_path, class: 'button sign-in-btn' %>
+      <p class="login-message"><%= link_to t('home.welcome.sign_in'), new_user_session_path %></p>
+      <%= link_to t('home.welcome.go_to_questions_board'), questions_path, class: 'button qanda-btn' %>
+    </div>
+
+    <div class="statistics-preview">
+      <div class="parent">
+        <%= image_tag 'graph.png', class: 'graph' %>
+        <%= image_tag 'calendar.png', class: 'calendar' %>
+      </div>
+    </div>
+
+  </div>
+</div>

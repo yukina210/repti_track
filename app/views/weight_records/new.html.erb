@@ -1,0 +1,27 @@
+<div class="main-content-without-slidebar">
+  <div class="container">
+
+    <h1><%= t('dashboard.new_weight.record') %></h1>
+
+    <%= form_with(model: [@pet, @weight_record], local: true) do |form| %>
+    <%= hidden_field_tag :selected_pet_id, @pet.id %>
+      <div class="field">
+        <%= form.label :date, t('dashboard.new_weight.date') %>
+        <%= form.date_field :date, required: true %>
+      </div>
+
+      <div class="field">
+        <%= form.label :weight, t('dashboard.new_weight.weight') %>
+        <div class="input-group">
+          <%= form.number_field :weight, step: 0.1, required: true, class: "form-control" %>
+          <div class="input-group-append">
+            <span class="input-group-text">g</span>
+          </div>
+        </div>
+      </div>
+
+      <%= form.submit t('dashboard.new_weight.submit'), class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

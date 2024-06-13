@@ -1,0 +1,160 @@
+/* Welcome styles */
+
+.welcome-header {
+    text-align: center;
+    color: #388087;
+    /* Adjust to match your color scheme */
+}
+
+.logo {
+    margin-top: 65px;
+    margin-bottom: 15px;
+    width: 200px;
+    /* Adjust as per your design */
+    height: 200px;
+}
+
+.main-content2 {
+    display: flex;
+    justify-content: center;
+    /* This will place space between the two child elements */
+    margin-top: 123px;
+    box-sizing: border-box;
+}
+
+.button {
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 10px;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.sign-in-btn {
+    background-color: #388087;
+    color: white;
+    width: 454px;
+    border-radius: 40px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        background-color: #2a5a66; // darker shade of the original color
+        transform: scale(1.05); // slightly enlarge the button
+    }
+}
+
+.qanda-btn {
+    background-color: #FAFAF8;
+    color: black;
+    width: 454px;
+    margin-top: 50px;
+    border-radius: 40px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05); // slightly enlarge the button
+    }
+}
+
+.welcome-actions {
+    text-align: center;
+    /* Center the buttons */
+}
+
+.login-message {
+    color: #495E57;
+    /* Adjust as per your design */
+    text-align: center;
+}
+
+.statistics-preview {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.parent {
+    position: relative;
+}
+
+.graph {
+    position: absolute;
+    top: -100px; // 上に少し移動
+    max-width: 350px;
+}
+
+.statistics-preview .calendar {
+    // position: absolute;
+    bottom: -100px; // 下に少し移動
+    right: -100px; // 右に少し移動
+    width: 350px; // 幅を固定
+    max-width: 350px; // 最大幅も固定
+}
+
+@media (max-width: 768px) {
+    .logo {
+        width: 150px;
+        height: 150px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .main-content2 {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .welcome-actions {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .login-message {
+        font-size: 15px;
+    }
+
+    .qanda-btn {
+        margin-top: 10px;
+    }
+
+    .button {
+        width: 80%;
+        font-size: 15px;
+    }
+
+    .sign-in-btn, .qanda-btn {
+        width: 80%;
+    }
+
+    .statistics-preview {
+        flex-direction: column;
+        align-items: center; // Ensure alignment is centered for stacking
+    }
+
+    .graph, .calendar {
+        //position: relative; // Use relative positioning
+        //max-width: 90%; // Adjust width to prevent overflow
+        width: auto; // Maintain aspect ratio
+        transform: none; // Reset any previous transformations
+    }
+
+    .graph {
+        top: 0px;
+        margin-left: -70px;
+        max-width: 270px;
+        //transform: rotate(-5deg); // Slightly rotate the graph
+        //z-index: 1; // Ensure graph is on top if overlapping
+    }
+
+    .statistics-preview .calendar {
+        right: -70px;
+        bottom: -150px;
+        max-width: 300px;
+        //transform: rotate(5deg); // Slightly rotate the calendar
+    }
+}

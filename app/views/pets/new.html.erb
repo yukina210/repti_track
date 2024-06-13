@@ -1,0 +1,52 @@
+<div class="main-content-without-slidebar">
+<div class="container">
+
+<%= form_with model: @pet, local: true, class: "new_pet" do |f| %>
+  <div class="avatar_field">
+    <%= image_tag(@pet.pet_avatar.url, id: "avatar-preview", class: "rounded-circle mt-3 clickable-avatar", size: '100x100') %>
+    <%= f.label t('pets.new.image'), class: "form-label" %>
+    <%= f.file_field :pet_avatar, id: 'profile_avatar', class: "form-control-avatar", style: "display: none;", onchange: "updateAvatarPreview(this);" %>
+    <%= f.hidden_field :pet_avatar_cache %>
+  </div>
+
+  <div class="field">
+    <%= f.label t('pets.new.pet_name'), class: "form-label" %>
+    <%= f.text_field :pet_name, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= f.label t('pets.new.category'), class: "form-label" %>
+    <%=f.select :category, Pet.categories.keys.map { |category| [I18n.t("categories.#{category}"), category] }, { include_blank: true }, class: "form-control", id: "pet_category" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :breed, t('pets.new.breed'), class: "form-label" %>
+    <%= f.select :breed, {}, {}, { class: "form-control js-select2", id: "pet_breed"} %>
+  </div>
+
+  <div class="field">
+    <%= f.label t('pets.new.birthday'), class: "form-label" %>
+    <div class="date_field">
+    <%= f.date_select :date_of_birth, {
+    start_year: Date.current.year,
+    end_year: Date.current.year - 100,
+    include_blank: true,
+    user_two_digit_numbers: true,
+    order: [:year, :month, :day]
+    }, class: "date-select" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%=f.label t('pets.new.gender'), class: "form-label" %>
+    <%=f.select :gender, Pet.genders.keys.map { |gender| [I18n.t("pet_genders.#{gender}"), gender] }, { include_blank: true }, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t('pets.new.submit'), class: "btn btn-primary" %>
+  </div>
+
+<% end %>
+
+</div>
+</div>

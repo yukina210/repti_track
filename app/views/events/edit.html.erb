@@ -1,0 +1,51 @@
+<div class="main-content-without-slidebar">
+<div class="container edit-event-container" data-event-id="<%= @event.id %>" data-pet-id="<%= @pet.id %>">
+
+<h1><%= t('dashboard.care.edit') %></h1>
+<%= form_with(model: [@pet, @event], local: true, multipart: true) do |form| %>
+<%= hidden_field_tag :selected_pet_id, @pet.id %>
+  <div class="field">
+    <%= form.label :date, t('dashboard.care.date'), for: 'event_date' %>
+    <%= form.date_field :date, id: 'event_date' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event_type, t('dashboard.care.event_type') %>
+    <% Event::EVENT_TYPES.each do |event_type| %>
+      <div class="checkbox">
+        <%= check_box_tag 'event[event_types][]', event_type, @event.event_types.include?(event_type), id: "event_types_#{event_type}" %>
+        <%= label_tag "event_types_#{event_type}" do %>
+          <%= image_tag "#{event_type}.png", class: 'event-icon' %>
+          <%= t("event_types.#{event_type}") %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note, t('dashboard.care.note'), for: 'event_note' %>
+    <%= form.text_area :note, id: 'event_note' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :images, t('dashboard.care.add_photo'), for: 'event_images' %>
+    <div class="image-upload-container">
+      <% 4.times do |i| %>
+        <% image = @event.images[i] || OpenStruct.new(url: asset_path('forum_default_image.png')) %>
+        <div class="image-wrapper">
+          <%= image_tag image.url, class: 'image-upload', id: "image-preview-#{i + 1}" %>
+          <%= form.file_field :images, multiple: true, id: "file-input-#{i + 1}", class: 'file-input', style: 'display: none;' %>
+          <% if @event.images[i] %>
+            <i class="fas fa-trash-alt remove-icon" data-index="<%= i %>"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= form.submit t('dashboard.care.submit'), class: 'btn btn-primary' %>
+<% end %>
+
+<%= link_to t('dashboard.care.back'), dashboard_path, class: 'btn btn-secondary' %>
+
+</div>
+</div>

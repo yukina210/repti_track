@@ -1,0 +1,99 @@
+$slidebar-width: 243px;
+$main-content-padding: 20px;
+$record-field-width: calc(50% - #{$main-content-padding / 2});
+
+.search-bar {
+    background-color: #6FB3B8;
+    margin-bottom: 20px;
+    text-align: center;
+    height: 85px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .search-input {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .search-button {
+      margin-left: 10px;
+    }
+}
+
+.main-content-pets {
+    margin-left: $slidebar-width + $main-content-padding;
+    padding: $main-content-padding;
+    justify-content: space-between;
+}
+
+.pet-actions {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.pet-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .pet-card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      width: 260px;
+      text-align: center;
+
+      .pet-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        font-size: 18px;
+        margin: 10px 0;
+      }
+
+      p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 4px;
+      }
+    }
+}
+
+@media (max-width: 768px) {
+  .main-content-pets {
+    margin-left: 0; // モバイルでは左のマージンを削除
+    padding: 20px; // ページ全体のパディングを調整
+    display: flex; // Flexbox を利用
+    flex-direction: column; // 要素を縦に並べる
+    align-items: center; // 中央揃え
+  }
+
+  .pet-list {
+    width: 100%; // ペットリストの幅を100%に
+    justify-content: center; // Flexbox の中心揃え
+  }
+
+  .pet-card {
+    width: 100%; // モバイルではカードの幅を100%に
+    max-width: 320px; // 最大幅を設定してカードが過大にならないように
+  }
+}

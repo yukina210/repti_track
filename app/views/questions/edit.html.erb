@@ -1,0 +1,31 @@
+<div class="new-question-container" data-question-id="<%= @question.id %>">
+  <%= form_with model: @question, local: true, multipart: true do |f| %>
+    <div class="form-group-q">
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title, class: "form-control-q", maxlength: 50, placeholder: "タイトル", required: true %>
+      <span class="character-limit">/50</span>
+    </div>
+    <div class="form-group-q">
+      <%= f.label :content, "質問内容" %>
+      <%= f.text_area :content, class: "form-control-q", rows: 10, placeholder: "質問内容", required: true %>
+    </div>
+    <div class="form-group-q">
+      <%= f.label :images, "画像" %>
+      <div class="image-upload-container-q">
+        <% 4.times do |i| %>
+          <% image = @question.images[i] || OpenStruct.new(url: asset_path('forum_default_image.png')) %>
+          <div class="image-wrapper">
+            <%= image_tag image.url, class: 'image-upload', id: "image-preview-#{i + 1}" %>
+            <%= f.file_field :images, multiple: true, id: "file-input-#{i + 1}", class: 'file-input', style: 'display: none;' %>
+            <% if @question.images[i] %>
+              <i class="fas fa-trash-alt remove-icon" data-index="<%= i %>"></i>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit '更新する', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

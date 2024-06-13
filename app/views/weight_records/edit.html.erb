@@ -1,0 +1,30 @@
+<div class="main-content-without-slidebar">
+  <div class="container">
+
+    <h1><%= t('dashboard.edit_weight.edit') %></h1>
+    <%= form_with(model: [@pet, @weight_record], local: true) do |form| %>
+    <%= hidden_field_tag :selected_pet_id, @pet.id %>
+    <div class="field">
+        <%= form.label t('dashboard.edit_weight.date') %>
+        <%= form.date_field :date %>
+    </div>
+
+    <div class="field">
+        <%= form.label :weight, t('dashboard.edit_weight.weight') %>
+        <div class="input-group">
+          <%= form.number_field :weight, step: 0.1, required: true, class: "form-control" %>
+          <div class="input-group-append">
+            <span class="input-group-text">g</span>
+          </div>
+        </div>
+    </div>
+
+    <%= form.submit t('dashboard.edit_weight.submit'), class: 'btn btn-primary' %>
+    <% end %>
+    <div class="buttons">
+    <%= button_to t('dashboard.edit_weight.delete'), [@pet, @weight_record], method: :delete, data: { confirm: '本当に削除しますか？この操作は取り消すことができません' }, class: 'btn btn-danger' %>
+    <%= link_to t('dashboard.edit_weight.goback'), dashboard_path, class: 'btn btn-secondary' %>
+    </div>
+
+  </div>
+</div>

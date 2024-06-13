@@ -1,0 +1,55 @@
+/* Customizing the container of the Select2 box */
+.select2-container .select2-selection--single {
+    height: 38px; /* Adjust the height */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Border radius */
+}
+
+/* Customizing the text within the selection */
+.select2-container .select2-selection--single .select2-selection__rendered {
+    line-height: 36px; /* Align text vertically */
+    padding-left: 10px; /* Text padding */
+    color: #444; /* Text color */
+}
+
+/* Customizing the dropdown arrow */
+.select2-container .select2-selection--single .select2-selection__arrow {
+    height: 36px; /* Arrow size to match the height */
+    right: 5px; /* Positioning from the right */
+}
+
+/* Customizing the dropdown list */
+.select2-container .select2-dropdown {
+    border-color: #ccc; /* Border color of dropdown */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adding some shadow */
+}
+
+/* Customizing individual list items */
+.select2-results__option {
+    padding: 6px 12px; /* Padding for options */
+    color: #333; /* Text color for options */
+}
+
+/* Customizing the hover state */
+.select2-results__option--highlighted {
+    background-color: #f0f0f0; /* Background color on hover or selection */
+    color: black; /* Text color on hover or selection */
+}
+
+/* State: Focus */
+.select2-container--open .select2-dropdown--below {
+    border-top: 2px solid blue; /* Highlight top border when open */
+}
+
+/* State: Disabled */
+.select2-container--default.select2-container--disabled .select2-selection--single {
+    background-color: #eee; /* Gray out background when disabled */
+    cursor: not-allowed; /* Show not-allowed cursor */
+}
+
+/* Set full width for mobile devices */
+@media (max-width: 768px) {
+    .select2-container {
+        width: 100% !important; /* Make select2 full width on small screens */
+    }
+}

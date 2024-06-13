@@ -1,0 +1,9 @@
+<div class="multi-step-indicator">
+  <ul>
+    <% @steps.each_with_index do |step, index| %>
+      <li class="<%= 'active' if @current_step == index + 1 %> <%= 'completed' if @current_step > index + 1 %>" data-step="<%= index + 1 %>">
+        <span class="step-number"><%= index + 1 %></span>
+        <span class="step-text"><%= step %></span>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,29 @@
+<div class="new-question-container">
+  <%= form_with model: @question, local: true, multipart: true do |f| %>
+    <div class="form-group-q">
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title, class: "form-control-q", maxlength: 50, placeholder: "タイトル", required: true %>
+      <span class="character-limit">/50</span>
+    </div>
+
+    <div class="form-group-q">
+      <%= f.label :content, "質問内容" %>
+      <%= f.text_area :content, class: "form-control-q", rows: 10, placeholder: "質問内容", required: true %>
+    </div>
+
+    <div class="form-group-q">
+      <%= f.label :images, "画像" %>
+      <div class="image-upload-container-q">
+        <% 4.times do |i| %>
+          <%= image_tag 'forum_default_image.png', class: 'image-upload', id: "image-preview-#{i + 1}" %>
+          <%= f.file_field :images, multiple: true, id: "file-input-#{i + 1}", class: 'file-input', style: 'display: none;' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit '下書き保存', class: 'btn btn-secondary-q', name: 'draft' %>
+      <%= f.submit '投稿', class: 'btn btn-primary-q', name: 'commit' %>
+    </div>
+  <% end %>
+</div>

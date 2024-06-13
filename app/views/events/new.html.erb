@@ -1,0 +1,61 @@
+<div class="main-content-without-slidebar">
+<div class="container">
+
+<h1><%= t('dashboard.care.care') %></h1>
+<%= form_with(model: [@pet, @event], local: true, multipart: true) do |form| %>
+<%= hidden_field_tag :selected_pet_id, @pet.id %>
+  <div class="field">
+    <%= form.label t('dashboard.care.date') %>
+    <%= form.date_field :date %>
+  </div>
+
+  <div class="field">
+    <%= form.label t('dashboard.care.event_type') %>
+    <% Event::EVENT_TYPES.each do |event_type| %>
+      <div class="checkbox">
+        <%= check_box_tag 'event[event_types][]', event_type, @event.event_types.include?(event_type), id: "event_types_#{event_type}" %>
+        <%= label_tag "event_types_#{event_type}" do %>
+          <%= image_tag "#{event_type}.png", class: 'event-icon' %>
+          <%= t("event_types.#{event_type}") %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label t('dashboard.care.note') %>
+    <%= form.text_area :note %>
+  </div>
+
+  <div class="field">
+    <%= form.label t('dashboard.care.add_photo') %>
+    <div class="image-upload-container">
+      <% 4.times do |i| %>
+        <%= image_tag 'forum_default_image.png', class: 'image-upload', id: "image-preview-#{i + 1}" %>
+        <%= form.file_field :images, multiple: true, id: "file-input-#{i + 1}", class: 'file-input', style: 'display: none;' %>
+      <% end %>
+    </div>
+  </div>
+
+      <div id="preview-images" class="field">
+        <!-- Selected images will be displayed here -->
+      </div>
+
+  <%= form.submit t('dashboard.care.submit'), class: 'btn btn-primary' %>
+<% end %>
+
+<%= link_to t('dashboard.care.back'), dashboard_path, class: 'btn btn-secondary' %>
+
+<style>
+/* Optional: Style the preview images */
+.selected-image {
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+</style>
+<%#= link_to 'Back', pet_events_path(@pet) %>
+
+</div>
+</div>

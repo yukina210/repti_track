@@ -1,0 +1,82 @@
+<%= render 'shared/slidebar' %>
+  <div class="search-bar-forum">
+    <div class="search-field">
+        <%= form_with url: questions_path, method: :get, local: true, data: { controller: "autocomplete", autocomplete_target: "input", target: "questions" } do %>
+            <%= text_field_tag :search, params[:search], placeholder: 'Search', class: 'search-input-forum', data: { action: "input->autocomplete#search" } %>
+            <%= submit_tag '検索', class: 'btn btn-primary-forum' %>
+        <% end %>
+    </div>
+
+    <% if user_signed_in? %>
+      <div class="search-fieald-contents">
+          <%= link_to new_question_path, class: 'btn btn-create' do %>
+            <i class="fas fa-plus"></i> 新規作成
+          <% end %>
+          <% if @drafts.any? %>
+            <%= link_to drafts_questions_path, class: 'btn btn-secondary' do %>
+                下書き一覧
+            <% end %>
+          <% end %>
+          <div class="notification-container">
+              <%= link_to '#', class: 'btn btn-notifications', id: 'notification-icon' do %>
+                  <i class="fas fa-bell"></i>
+                  <% if @notifications.any? %>
+                  <span class="notification-bubble"><%= @notifications.count %></span>
+                  <% end %>
+              <% end %>
+              <div id="notification-dropdown" class="notification-dropdown" style="display: none;">
+                  <% @notifications.each do |notification| %>
+                  <div class="notification-item">
+                      <%= link_to notification.message, notification_path(notification), method: :get %>
+                      <%= link_to '既読にする', mark_as_read_notification_path(notification), method: :patch, class: 'btn btn-mark-as-read' %>
+                  </div>
+                  <% end %>
+              </div>
+          </div>
+      </div>
+    <% end %>
+  </div>
+
+
+<div class="main-content-forum">
+  <div class="sorting-buttons">
+    <%= link_to '新着順', questions_path(sort: 'newest'), class: "btn btn-sort #{'active' if params[:sort] == 'newest' || params[:sort].blank?}" %>
+    <%= link_to '古い順', questions_path(sort: 'oldest'), class: "btn btn-sort #{'active' if params[:sort] == 'oldest'}" %>
+  </div>
+
+  <% @questions.each do |question| %>
+    <div class="question-card">
+      <div class="question-header">
+        <%= image_tag question.user.profile.avatar.url, class: 'avatar' %>
+        <div class="question-info">
+          <p class="username"><strong><%= question.user.profile.username %></strong></p>
+          <p class="time-ago"><%= time_ago_in_words(question.created_at) %>前</p>
+        </div>
+      </div>
+      <div class="question-content">
+        <h3><%= link_to question.title, question_path(question) %></h3>
+        <p><%= truncate(question.content, length: 100) %></p>
+        <% if question.images.present? %>
+          <% question.images.each do |image| %>
+            <%= image_tag image.url, class: 'question-image' %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="question-footer">
+        <div class="comment-count">
+          <i class="fas fa-comments"></i> <%= question.answers.count %>
+        </div>
+        <div class="question-footer-contents">
+            <% if question.user == current_user %>
+            <%= link_to edit_question_path(question), class: 'btn btn-edit' do %>
+                <i class="fas fa-edit"></i>
+            <% end %>
+            <%= link_to question_path(question), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-delete' do %>
+                <i class="fas fa-trash"></i>
+            <% end %>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

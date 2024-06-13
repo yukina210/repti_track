@@ -1,0 +1,49 @@
+<div class="main-content-without-slidebar">
+  <div class="container">
+    <%= form_with model: @pet, local: true, class: "edit_pet" do |f| %>
+      <div class="avatar_field">
+        <%= image_tag(@pet.pet_avatar.url, id: "avatar-preview", class: "rounded-circle mt-3 clickable-avatar", size: '100x100') %>
+        <%= f.label :pet_avatar, t('pets.edit.image'), class: "form-label", for: "pet_avatar" %>
+        <%= f.file_field :pet_avatar, id: 'pet_avatar', class: "form-control-avatar", style: "display: none;", onchange: "updateAvatarPreview(this);" %>
+        <%= f.hidden_field :pet_avatar_cache %>
+      </div>
+
+      <div class="field">
+        <%= f.label :pet_name, t('pets.new.pet_name'), class: "form-label", for: "pet_name" %>
+        <%= f.text_field :pet_name, id: "pet_name", class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :category, t('pets.new.category'), class: "form-label", for: "pet_category" %>
+        <%= f.select :category, options_for_select(Pet.categories.keys.map { |category| [I18n.t("categories.#{category}"), category] }, @pet.category), { include_blank: true }, class: "form-control", id: "pet_category" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :breed, t('pets.new.breed'), class: "form-label", for: "pet_breed" %>
+        <%= f.select :breed, [[@pet.breed, @pet.breed]], {}, { class: "form-control js-select2", id: "pet_breed"} %>
+      </div>
+
+      <div class="field">
+        <%= f.label :date_of_birth, t('pets.new.birthday'), class: "form-label", for: "pet_date_of_birth" %>
+        <div class="date_field">
+          <%= f.date_select :date_of_birth, {
+            start_year: Date.current.year,
+            end_year: Date.current.year - 100,
+            include_blank: true,
+            use_two_digit_numbers: true,
+            order: [:year, :month, :day]
+          }, class: "date-select", id: "pet_date_of_birth" %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :gender, t('pets.new.gender'), class: "form-label", for: "pet_gender" %>
+        <%= f.select :gender, options_for_select(Pet.genders.keys.map { |gender| [I18n.t("pet_genders.#{gender}"), gender] }, @pet.gender), { include_blank: true }, class: "form-control", id: "pet_gender" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit t('pets.edit.submit'), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

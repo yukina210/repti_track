@@ -1,0 +1,20 @@
+.profile-details {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* アバターと詳細情報の間にスペースを追加 */
+  margin-bottom: 20px; /* プロフィール全体の下にスペースを追加 */
+}
+
+.profile-avatar {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-details .details {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-details .details p {
+  margin: 0; /* 段落の余白をリセット */
+}

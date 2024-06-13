@@ -1,0 +1,56 @@
+<div class="main-content-without-slidebar">
+
+<%= render 'shared/multi_step_indicator', steps: @steps, current_step: @current_step %>
+
+  <div class="logo0">
+    <%= image_tag 'logo0.png', class: 'form_logo' %>
+  </div>
+  <div class="container">
+    <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), local: true do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label t('users.new.email'), class: "form-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label t('users.new.password'), class: "form-label" %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> <%= t('users.new.min') %>)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label t('users.new.password_confirmation'), class: "form-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit t('users.new.submit'), class: "btn btn-primary" %>
+      </div>
+
+      <div class="divider">
+        <span class="divider-content"><%= t('users.new.or') %></span>
+      </div>
+
+      <div class="btn-group">
+        <%= form_tag(user_omniauth_authorize_path(:google_oauth2), method: :post, id: 'google_oauth2_form') do %>
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <% end %>
+
+        <%- if devise_mapping.omniauthable? %>
+          <%- resource_class.omniauth_providers.each do |provider| %>
+            <%= button_to omniauth_authorize_path(resource_name, provider), method: :post, class: "btn btn-api" do %>
+              <i class="fab fa-google"></i> Googleでサインアップ
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+
+
+    <% end %>
+    <%= t('users.new.already_have_an_account') %> <%= link_to t('user_sessions.new.login'), new_session_path(resource_name) %>
+  </div>
+</div>

@@ -1,0 +1,413 @@
+$slidebar-width: 243px;
+
+.search-bar-forum {
+  margin-left: $slidebar-width;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #6FB3B8;
+  padding: 25px;
+}
+
+.search-field {
+  margin-left: $slidebar-width;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.search-field form {
+  display: flex;
+}
+
+.search-input-forum {
+  width: 300px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.search-field-contents {
+  display: flex;
+  align-items: center;
+}
+
+.btn-primary-forum {
+  background-color: #388087;
+  color: white;
+  border-radius: 40px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    background-color: #2a5a66;
+    transform: scale(1.05);
+  }
+}
+
+.btn-create, .btn-notifications {
+  margin-left: 20px;
+  color: white;
+  font-size: 25px;
+}
+
+.notification-bubble {
+  background-color: red;
+  border-radius: 50%;
+  padding: 3px 7px;
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.sorting-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #6FB3B8;
+}
+
+.btn-sort {
+  margin-right: 10px;
+  color: #6FB3B8;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn-sort.active {
+  background-color: #6FB3B8;
+  color: white;
+}
+
+.main-content-forum {
+  margin-left: $slidebar-width;
+  padding: 40px;
+}
+
+.question-card {
+  border-bottom: 1px solid #6FB3B8;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.question-header {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.question-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  margin: 0;
+  color: #388087;
+  font-weight: bold;
+}
+
+.time-ago {
+  margin: 0;
+  font-size: 12px;
+  color: #6FB3B8;
+}
+
+.question-content {
+  margin-top: 10px;
+}
+
+.question-image {
+  max-width: 100px;
+  margin-top: 10px;
+}
+
+.question-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.comment-count {
+  color: #6FB3B8;
+}
+
+.btn-edit, .btn-delete {
+  color: #6FB3B8;
+  margin-left: 5px;
+}
+
+.notification-container {
+  position: relative;
+  display: inline-block;
+}
+
+.notification-bubble {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 0.2em 0.6em;
+  font-size: 0.8em;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.notification-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notifications-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.notifications-list .unread {
+  font-weight: bold;
+}
+
+.notifications-list .notification-link {
+  text-decoration: none;
+  color: black;
+}
+
+.notifications-list .mark-as-read {
+  color: blue;
+  cursor: pointer;
+}
+
+.notification-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.notification-item.unread {
+  background-color: #f9f9f9;
+}
+
+.notification-time {
+  font-size: 12px;
+  color: #888;
+}
+
+#notification-dropdown {
+  position: absolute;
+  top: 40px; /* アイコンの下に表示 */
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 200px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#notification-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#notification-dropdown ul li {
+  margin-bottom: 10px;
+}
+
+.new-question-container {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group-q {
+  margin-bottom: 20px;
+}
+
+.form-control-q {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.character-limit {
+  display: inline-block;
+  margin-left: 10px;
+  color: #999;
+}
+
+.image-upload-container-q {
+  display: flex;
+  gap: 10px; /* 画像間の間隔を設定します。 */
+  flex-wrap: wrap;
+}
+
+.image-upload {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+
+.btn-primary-q {
+  background-color: #388087;
+  color: white;
+}
+
+.btn-secondary-q {
+  background-color: #6c757d;
+  color: white;
+}
+
+.question-container, .answers-container {
+  margin-bottom: 20px;
+}
+
+.question-info, .answer-info {
+  margin-left: 10px;
+}
+
+.question-images, .answer-images {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.comment-count, .likes-count {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.form-group-q-s {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.sorting-buttons-s {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.answer-header{
+    display: flex;
+    align-items: center;
+}
+
+.answer-footer{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.likes-count {
+    margin-left: 5px;
+    margin-right: 20px;
+}
+
+#answer-textarea {
+  transition: height 0.3s ease;
+}
+
+#answer-textarea.expanded {
+  height: 150px;
+}
+
+.form-actions {
+  margin-top: 10px;
+}
+
+.answer-s {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.answer-edit-field {
+    margin-top: 100px;
+}
+
+.answer-content {
+    margin-top: 10px;
+    width: 500px;
+}
+
+@media (max-width: 768px) {
+  .search-bar-forum {
+    margin-left: 0;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: flex;
+    flex-direction: row; // 要素を横一列に並べる
+    justify-content: space-between; // 要素間のスペースを均等に分配
+    padding-right: 100px;
+    align-items: center; // 要素を中央揃えに
+    flex-wrap: nowrap; // 要素を折り返さない
+  }
+
+  .search-field {
+    margin-left: 10px;
+    padding-left: 20px;
+    display: flex;
+    flex-grow: 1; // 可変のスペースを割り当て、拡大を許可
+    justify-content: flex-start;
+    margin-right: 10px; // 右隣の要素との間隔を設定
+  }
+
+  .search-input-forum {
+    max-width: 250px;
+  }
+
+  .btn-primary-forum {
+    flex-shrink: 0; // ボタンの縮小を防ぐ
+  }
+
+  .btn-create, .btn-secondary, .btn-notifications {
+    padding: 8px; // ボタンのパディングを調整
+    margin-left: 0px;
+    font-size: 17px;
+  }
+
+  .main-content-forum {
+    margin-left: 0; // 左マージンを削除
+    padding: 30px; // ページ全体のパディングを調整
+  }
+
+  .question-header, .question-footer {
+    align-items: center; // 要素を中央揃えに
+  }
+
+  .question-footer-contents {
+    flex-direction: column; // フッターのコンテンツを縦に並べる
+    align-items: center; // 中央揃え
+  }
+}

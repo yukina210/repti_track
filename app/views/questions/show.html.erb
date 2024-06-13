@@ -1,0 +1,99 @@
+<%= render 'shared/slidebar' %>
+
+<div class="main-content-forum">
+  <div class="question-container" data-question-id="<%= @question.id %>">
+    <div class="question-header">
+      <%= image_tag @question.user.profile.avatar.url, class: 'avatar' %>
+      <div class="question-info">
+        <p class="username"><strong><%= @question.user.profile.username %></strong></p>
+        <p class="time-ago"><%= time_ago_in_words(@question.created_at) %>前</p>
+      </div>
+    </div>
+
+    <div class="question-content">
+      <h2><%= @question.title %></h2>
+      <p><%= simple_format(@question.content) %></p>
+      <% if @question.images.present? %>
+        <div class="question-images">
+          <% @question.images.each do |image| %>
+            <%= image_tag image.url, class: 'question-image' %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="question-footer">
+      <div class="comment-count">
+        <i class="fas fa-comments"></i> <%= @question.answers.count %>
+      </div>
+      <% if @question.user == current_user %>
+        <div class="question-actions">
+          <%= link_to edit_question_path(@question), class: 'btn btn-edit' do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
+          <%= link_to question_path(@question), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-delete' do %>
+            <i class="fas fa-trash"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="answers-container">
+    <div class="sorting-buttons-s">
+      <%= link_to '新着順', question_path(@question, sort: 'newest'), class: "btn btn-sort #{'active' if params[:sort] == 'newest' || params[:sort].blank?}" %>
+      <%= link_to '古い順', question_path(@question, sort: 'oldest'), class: "btn btn-sort #{'active' if params[:sort] == 'oldest'}" %>
+      <%= link_to '評価順', question_path(@question, sort: 'likes'), class: "btn btn-sort #{'active' if params[:sort] == 'likes'}" %>
+    </div>
+
+    <% if user_signed_in? %>
+      <div class="new-answer">
+        <%= form_with model: [@question, @question.answers.build], local: true do |f| %>
+          <div class="form-group-q-s">
+            <%= f.text_area :content, placeholder: '回答を書く', id: 'answer-textarea', class: 'form-control' %>
+          </div>
+          <div class="form-actions" id="answer-submit" style="display: none;">
+            <%= f.submit '投稿', class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>回答するにはログインが必要です。</p>
+      <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-primary' %>
+    <% end %>
+
+    <% @answers.each do |answer| %>
+      <div class="answer-s">
+        <div class="answer-header">
+          <%= image_tag answer.user.profile.avatar.url, class: 'avatar' %>
+          <div class="answer-info">
+            <p class="username"><strong><%= answer.user.profile.username %></strong></p>
+            <p class="time-ago"><%= time_ago_in_words(answer.created_at) %>前</p>
+          </div>
+        </div>
+        <div class="answer-content">
+          <p><%= simple_format(answer.content) %></p>
+          <% if answer.image.present? %>
+            <%= image_tag answer.image.url, class: 'answer-image' %>
+          <% end %>
+        </div>
+        <div class="answer-footer">
+          <i class="fas fa-thumbs-up like-icon <%= 'liked' if answer.likes.exists?(user: current_user) %>" data-url="<%= answer.likes.exists?(user: current_user) ? question_answer_like_path(@question, answer) : question_answer_like_path(@question, answer) %>" data-method="<%= answer.likes.exists?(user: current_user) ? 'delete' : 'post' %>"></i>
+          <span class="likes-count"><%= answer.likes.count %></span>
+          <% if user_signed_in? %>
+            <% if answer.user == current_user %>
+              <%= link_to edit_question_answer_path(@question, answer), class: 'btn btn-edit' do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+              <%= link_to question_answer_path(@question, answer), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-delete' do %>
+                <i class="fas fa-trash"></i>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

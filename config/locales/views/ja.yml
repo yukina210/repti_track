@@ -1,0 +1,266 @@
+ja:
+  errors:
+    messages:
+      extension_allowlist_error: "許可されているファイル拡張子ではありません"
+  event_types:
+    feeding: 餌やり
+    excretion: 排泄
+    regurgitation: 吐き戻し
+    bathing: 温浴
+    shedding: 脱皮
+    egg_laying: 産卵
+    mating: 交尾
+    food_refusal: 拒食
+    habitat_cleaning: お部屋掃除
+  date:
+    formats:
+      default: "%Y/%m/%d"
+      year_month: "%Y年%m月"
+  genders:
+      not_specified: 選択しない
+      male: 男性
+      female: 女性
+      other: その他
+  pet_genders:
+      not_specified: 不明
+      male: オス
+      female: メス
+  categories:
+      snake: ヘビ
+      lizard: トカゲ
+      gecko: ヤモリ
+      chameleon: カメレオン
+      turtle: カメ
+      others: その他
+  steps:
+      profile: アカウント作成
+      pet: プロフィール登録
+      food: ペット登録
+  helpers:
+    submit:
+      create: 登録
+      submit: 保存
+      update: 更新
+    label:
+      email: メールアドレス
+      password: パスワード
+      password_confirmation: パスワード確認
+      remember_me: ログイン状態を保持する
+      next: 次へ
+  home:
+    welcome:
+      title: Repti track へようこそ！
+      description: 爬虫類専門の体調・お世話記録アプリです
+      sign_up: アカウント作成して始める
+      sign_in: すでにアカウントをお持ちの方はこちら
+      go_to_questions_board: このまま質問箱へ
+  profile:
+    new:
+      username: ユーザー名
+      birthday: お誕生日
+      image: 画像を登録
+      gender: 性別
+      male: 男性
+      female: 女性
+      other: その他
+      submit: ペット登録画面へ
+      go_dashboard: ペットを登録しない
+    edit:
+      username: ユーザー名
+      birthday: お誕生日
+      image: 画像を変更
+      gender: 性別
+      male: 男性
+      female: 女性
+      other: その他
+      submit: 変更を保存
+      goback: 戻る
+    create:
+      success: プロフィール登録が完了しました
+    update:
+      success: プロフィールを更新しました
+      alert: 更新に失敗しました
+  shared:
+    slidebar:
+      dashboard: ダッシュボード
+      pets: ペット
+      forum: 質問箱
+      profile: アカウント情報
+      logout: ログアウト
+      login: ログイン
+  user_sessions:
+    new:
+      login: ログイン
+      remember_me: ログイン状態を保持する
+      forgot_password: パスワードをお忘れの方はこちら
+      new_user: アカウント作成はこちら
+      log_in_with_google: Googleでログイン
+      log_in_with_apple: Appleでログイン
+      goback: 戻る
+    create:
+      success: ログインしました
+      alert: メールアドレスかパスワードが間違っています
+    destroy:
+      success: ログアウトしました
+  users:
+    new:
+      sign_up: アカウント作成
+      email: メールアドレス
+      password: パスワード
+      min: 文字以上
+      password_confirmation: パスワード確認
+      submit: アカウント作成
+      already_have_an_account: すでにアカウントをお持ちの方はこちら
+      sign_in_with_google: Googleでサインイン
+      sign_in_with_apple: Appleでサインイン
+      or: または
+    create:
+      success: アカウントを作成しました
+    edit:
+      edit: アカウント情報編集
+      password: 新しいパスワード（6文字以上）
+      leave_blank_if_you_dont_want_to_change_it: 変更しない場合は空欄にしてください
+      password_confirmation: 新しいパスワード（確認）
+      current_password: 現在のパスワード
+      we_need_your_current_password_to_confirm_your_changes: 変更を確認するため現在のパスワードが必要です
+      cancel_my_account: アカウントを削除
+      unhappy: ペットの記録・質問も全て削除されます。
+      are_you_sure: ペットの記録・質問も全て削除されます。本当によろしいですか？
+      submit: 更新
+      goback: 戻る
+  devise:
+    passwords:
+      new:
+        title: "パスワードをお忘れですか？"
+        email: "メールアドレス"
+        submit: "パスワードリセットの手順を送信"
+      edit:
+        title: "パスワードを変更する"
+        new_password: "新しいパスワード"
+        characters_minimum: "文字以上"
+        confirm_new_password: "新しいパスワードの確認"
+        change_my_password: "パスワードを変更する"
+  dashboard:
+    index:
+      start_date: "開始日"
+      end_date: "終了日"
+      update_chart: "表示期間を変更"
+      record: の記録
+      weight: "体重(g)"
+      last_weight: 最終記録
+      edit: 修正
+      today_weight: 今日の体重
+      record_weight: "%{pet_name}の体重を記録"
+      calendar: お世話カレンダー
+      year: 年
+      month: 月
+      record_care: お世話を記録
+    new_weight:
+      record: 体重を記録
+      date: 記録する日付
+      weight: 体重
+      submit: 記録する
+    edit_weight:
+      edit: 体重の修正
+      date: 修正する日付
+      weight: 体重
+      record_weight: 体重を記録
+      submit: 修正する
+      delete: 体重記録を削除
+      goback: 戻る
+    care:
+      care: お世話
+      edit: お世話を編集
+      date: お世話日
+      event_type: お世話内容
+      feeding: 餌やり
+      excrament: 排泄
+      regurgitation: 吐き戻し
+      bathing: 温浴
+      shedding: 脱皮
+      laying_eggs: 産卵
+      mating: 交尾
+      note: メモ
+      no_note: メモがありません
+      add_photo: 写真を追加
+      remove_photo: 写真を削除
+      submit: お世話を記録
+      update_event: お世話を修正
+      delete: お世話内容を削除
+      back: 戻る
+    show:
+      event_detail: お世話の詳細
+      date: 日付
+      event_type: お世話内容
+      note: メモ
+      image: 画像
+      edit: 修正
+      back: 戻る
+  forum:
+    header:
+      search: 検索
+      create: 新規作成
+    index:
+      latest: 新着順
+      popular: 人気順
+      username: ユーザー名
+      when: 投稿日
+    show:
+      when: 投稿日
+      latest: 新着順
+      oldest: 古い順
+      rated: 評価順
+      answer: 回答を書く
+    new:
+      title: タイトル
+      content: 質問内容
+      image: 画像を追加
+      save_as_draft: 下書き保存
+      submit: 投稿
+      goback: 戻る
+    edit:
+      cancel: キャンセル
+      submit: 投稿
+    answer:
+      submit: 投稿
+    destroy:
+      confirm: 本当に削除しますか？
+      warning: 一度削除すると元に戻せません
+      cancel: 削除しない
+      delete: 削除する
+  pets:
+    new:
+      image: 画像を登録
+      pet_name: ペットのおなまえ
+      category: 分類
+      breed: 種類
+      birthday: お誕生日
+      year: 年
+      month: 月
+      day: 日
+      not_sure: 不明な場合はおおよその日付をご入力ください
+      gender: 性別
+      food: ごはん
+      what_it_eats: いつも食べているもの
+      addmore: さらに追加
+      addpet: ペットを追加
+      submit: 登録完了!
+      next: 次へ
+      goback: 戻る
+    index:
+      addpet: ペットを追加
+      slash: /
+      born: 生まれ
+      edit: 編集
+      delete: 削除
+    edit:
+      image: 画像を変更
+      submit: 修正内容を保存
+      goback: 戻る
+      delete: このペットを削除
+    destroy:
+      confirm: 本当にこのペットを削除しますか？
+      warning: 一度削除すると元に戻せません
+      warning2: このペットに関連する記録も削除されます
+      cancel: 削除しない
+      delete: 削除する

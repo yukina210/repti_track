@@ -1,0 +1,37 @@
+<%# ハンバーガーメニューアイコン %>
+<div class="hamburger">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<nav class="slidebar">
+  <%= image_tag 'logo2.png', alt: 'Repti track logo', class: 'slidebar-logo' %>
+  <ul class="navigation-menu">
+    <% if user_signed_in? %>
+      <li class="navigation-item">
+        <%= image_tag 'dashboard.png', size: '16x16' %>
+        <%= link_to t('shared.slidebar.dashboard'), dashboard_path, class: 'navigation-link' %>
+      </li>
+      <li class="navigation-item">
+        <%= image_tag 'reptile.png', size: '16x16' %>
+        <%= link_to t('shared.slidebar.pets'), pets_path, class: 'navigation-link' %>
+      </li>
+      <li class="navigation-item">
+        <%= image_tag 'qanda.png', size: '16x16' %>
+        <%= link_to t('shared.slidebar.forum'), questions_path, class: 'navigation-link' %>
+      </li>
+      <li class="navigation-item">
+        <%= image_tag 'account.png', size: '16x16' %>
+        <%= link_to t('shared.slidebar.profile'), profile_path(current_user.profile), class: 'navigation-link' %>
+      </li>
+      <li class="navigation-item">
+        <%= link_to t('shared.slidebar.logout'), destroy_user_session_path, method: :delete, class: 'navigation-link' %>
+      </li>
+    <% else %>
+      <li class="navigation-item">
+        <%= link_to t('shared.slidebar.login'), new_user_session_path, class: 'navigation-link' %>
+      </li>
+    <% end %>
+  </ul>
+</nav>

@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pet: one
+  date: 2024-05-19
+  feed: false
+  excretion: false
+  regurgitation: false
+  bathing: false
+  shedding: false
+  egg_laying: false
+  mating: false
+  note: MyText
+  images: 
+
+two:
+  pet: two
+  date: 2024-05-19
+  feed: false
+  excretion: false
+  regurgitation: false
+  bathing: false
+  shedding: false
+  egg_laying: false
+  mating: false
+  note: MyText
+  images: 

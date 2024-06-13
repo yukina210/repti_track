@@ -1,0 +1,10 @@
+//= link_tree ../images
+//= link_directory ../stylesheets .css
+//= link stimulus-autocomplete.js
+//= link application.js
+//= link @hotwired--stimulus.js
+//= link controllers/application.js
+//= link controllers/autocomplete_controller.js
+//= link controllers/hello_controller.js
+//= link controllers/index.js
+//= link jquery.min.js

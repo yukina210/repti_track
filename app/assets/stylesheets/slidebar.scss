@@ -1,0 +1,109 @@
+// Variables
+$slidebar-width: 243px;
+
+.slidebar {
+    width: $slidebar-width;
+    background-color: #FAFAF8;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.slidebar-logo {
+    width: 70%;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.navigation-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation-item {
+    padding: 7px 25px;
+    display: flex;
+    align-items: center;
+}
+
+.navigation-link {
+    color: #388087;
+    text-decoration: none;
+    display: block;
+    padding: 15px 20px;
+    transition: background-color 0.3s;
+}
+
+.navigation-item:hover {
+    background-color: #BADFE7;
+}
+
+// ハンバーガーメニューアイコンのスタイル
+// デフォルトでは非表示
+.hamburger {
+    display: none; // 常に非表示に
+}
+
+// モバイル用スタイル
+@media (max-width: 768px) {
+    .hamburger {
+        display: block; // モバイルビューでは表示
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        height: 32px; // アイコンの高さ
+        width: 32px; // アイコンの幅
+        position: fixed;
+        top: 50px;
+        right: 50px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; // 中心に要素を配置
+    }
+    .hamburger, .hamburger::before, .hamburger::after {
+        height: 3px; // バーの高さ
+        width: 28px; // バーの幅を固定値に変更
+        background: #333; // バーの色
+        transition: all 0.3s ease-in-out;
+        margin-top: -1.5px; // 中心に配置するためのマージン設定
+    }
+
+    .hamburger::before, .hamburger::after {
+        content: '';
+        position: absolute;
+    }
+
+    .hamburger::before {
+        top: -10px;
+    }
+
+    .hamburger::after {
+        bottom: -10px;
+    }
+
+    .hamburger.active {
+        background: transparent; // メインバーを非表示に
+    }
+
+    .hamburger.active::before {
+        transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .hamburger.active::after {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .slidebar {
+        width: 50%; // 一時的に全幅に
+        right: -100%; // 右側からスライドイン
+        left: auto; // 左のプロパティを無効に
+        transition: right 0.3s; // 右側からのアニメーション
+    }
+
+    .slidebar.active {
+        right: 0; // アクティブ時は画面に表示
+    }
+}

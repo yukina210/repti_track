@@ -1,0 +1,75 @@
+.multi-step-indicator {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.multi-step-indicator ul {
+    width: 600px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    color: #666666;
+}
+
+  .multi-step-indicator li {
+    flex: 1;
+    position: relative;
+    text-align: center;
+}
+
+.multi-step-indicator li::before {
+    content: attr(data-step);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: #e0e0e0;
+}
+
+.multi-step-indicator li .step-number {
+  display: block;
+  margin-top: 10px; /* Adjust as needed */
+  font-weight: bold;
+}
+
+.multi-step-indicator li .step-text {
+  display: block;
+  margin-top: 5px; /* Adjust as needed */
+}
+
+.multi-step-indicator li.active::before,
+.multi-step-indicator li.completed::before {
+  border-color: red; /* Or your chosen highlight color */
+  color: red;
+}
+
+/* This pseudo-element draws the connecting lines */
+.multi-step-indicator li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 15px; /* Adjust to vertically center the line with the circles */
+  left: calc(50% + 15px); /* Adjust based on the size of the circles */
+  width: calc(100% - 30px); /* Adjust based on the size of the circles */
+  height: 2px;
+  background: #e0e0e0;
+  z-index: 0; /* Lines should be behind the circles */
+}
+
+/* Change the line color when a step is completed */
+.multi-step-indicator li.completed:not(:last-child)::after {
+  background: red; /* Or your chosen highlight color */
+}
+
+/* Remove the line after the active step */
+.multi-step-indicator li.active:not(:last-child)::after {
+  background: none;
+}

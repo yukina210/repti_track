@@ -1,0 +1,37 @@
+<%= render 'shared/slidebar' %>
+
+<div class="search-bar">
+  <%= form_with url: pets_path, method: :get, local: true, data: { controller: "autocomplete", autocomplete_target: "input", target: "pets" } do |form| %>
+    <%= form.text_field :search, placeholder: "Search", class: "search-input", data: { action: "input->autocomplete#search" } %>
+    <%= submit_tag '検索', class: 'btn btn-primary-forum' %>
+  <% end %>
+</div>
+
+<div class="main-content-pets">
+
+  <div class="pet-actions">
+    <%= link_to "+ ペットを追加", new_pet_path, class: "btn btn-primary" %>
+  </div>
+
+  <div class="pet-list">
+    <% @pets.each do |pet| %>
+      <div class="pet-card">
+        <%= image_tag pet.pet_avatar.url, class: "pet-avatar" %>
+        <h2><%= pet.pet_name %></h2>
+        <p><%= pet.breed %></p>
+        <p><%= gender_in_japanese(pet.gender) %></p>
+        <p><%= pet.date_of_birth.strftime("%Y年%m月%d日生まれ") %></p>
+        <div class="buttons">
+            <%= link_to(edit_pet_path(pet), class: "btn btn-secondary") do %>
+              <%= image_tag("edit.png", alt: "編集", size: '14x14') %>
+              <%= t('pets.index.edit')%>
+            <% end %>
+            <%= button_to pet, method: :delete, data: { turbo_method: :delete, confirm: '本当に削除しますか？この操作は取り消すことができません' }, class: "btn btn-danger" do %>
+              <%= image_tag("delete.png", alt: "削除", size: '14x14') %>
+              <%= t('pets.index.delete') %>
+            <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

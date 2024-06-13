@@ -1,0 +1,86 @@
+<%= render 'shared/slidebar' %>
+
+  <div class="pet-selection">
+    <%= form_with url: dashboard_path, method: :get, local: true do %>
+      <%= select_tag :selected_pet_id, options_from_collection_for_select(@pets, :id, :pet_name, @selected_pet&.id), prompt: "ペットを選択", class: "form-control" %>
+      <%= submit_tag "表示", class: "btn btn-pet-selection" %>
+    <% end %>
+
+    <% if @selected_pet %>
+      <%= image_tag @selected_pet.pet_avatar.url, class: "pet-avatar" %>
+    <% end %>
+  </div>
+
+<div class="main-content">
+  <% if @selected_pet %>
+    <div class="record_field">
+      <div class="field_header">
+        <h1><%= t('dashboard.index.weight') %></h1>
+      </div>
+      <div class="chart-controls">
+        <%= form_with url: dashboard_path, method: :get, local: true, class: 'date-form-main' do %>
+          <%= hidden_field_tag :selected_pet_id, @selected_pet.id %>
+          <div class="form-group">
+            <%= date_field_tag :start_date, params[:start_date] || @start_date.strftime('%Y-%m-%d'), class: 'form-control-main' %>
+            <p>〜</p>
+            <%= date_field_tag :end_date, params[:end_date] || @end_date.strftime('%Y-%m-%d'), class: 'form-control-main' %>
+          </div>
+          <div class="form-group">
+            <%= select_tag :time_range, options_for_select([['全てのデータを表示', 'all'], ['直近1週間', 'week'], ['直近1ヶ月', 'month'], ['直近半年', 'half_year'], ['直近1年', 'year']], selected: params[:time_range]), class: 'form-control-main' %>
+          </div>
+          <%= submit_tag t('dashboard.index.update_chart'), class: 'btn btn-primary-main' %>
+        <% end %>
+      </div>
+
+      <div class="line_chart">
+        <% if @weight_data.present? && @weight_data.first[:data].present? %>
+          <canvas id="chart-<%= @selected_pet.id %>" data-pet-id="<%= @selected_pet.id %>" data-weight-data='<%= @weight_data.first[:data].to_json.html_safe %>'></canvas>
+          <div class="chart-button">
+            <%= link_to t('dashboard.index.record_weight', pet_name: @selected_pet.pet_name || '不明'), new_pet_weight_record_path(@selected_pet.id), class: 'btn btn-primary' %>
+          </div>
+        <% else %>
+          <p>体重データがありません。</p>
+          <div class="chart-button">
+            <%= link_to t('dashboard.index.record_weight', pet_name: @selected_pet.pet_name || '不明'), new_pet_weight_record_path(@selected_pet.id), class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+
+   </div>
+
+   <div class="record_field">
+      <div class="field_header">
+        <h1><%= t('dashboard.index.calendar') %></h1>
+      </div>
+      <div class="calendar">
+        <%= month_calendar do |date| %>
+          <div class="calendar-date">
+            <span class="date-number">
+              <%= link_to date.day, show_by_date_pet_events_path(@selected_pet, date: date) %>
+            </span>
+            <% displayed_icons = Set.new %>
+            <% @selected_pet.events.where(date: date).each do |event| %>
+              <% event.event_types.each do |type| %>
+                <% unless displayed_icons.include?(type) %>
+                  <%= image_tag "#{type}.png", class: 'calendar-icon' %>
+                  <% displayed_icons.add(type) %>
+                <% end %>
+              <% end %>
+              <% if event.note.present? && !displayed_icons.include?('note') %>
+                <%= image_tag 'note.png', class: 'calendar-icon' %>
+                <% displayed_icons.add('note') %>
+              <% end %>
+              <% if event.images.any? && !displayed_icons.include?('photos') %>
+                <%= image_tag 'photos.png', class: 'calendar-icon' %>
+                <% displayed_icons.add('photos') %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <%= link_to t('dashboard.index.record_care'), new_pet_event_path(@selected_pet), class: 'btn btn-primary' %>
+    </div> 
+  <% else %>
+    <p>表示するペットを選択してください。</p>
+  <% end %>
+</div>

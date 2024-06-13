@@ -1,0 +1,22 @@
+<%= render 'shared/slidebar' %>
+
+<div class="main-content">
+  <div class="container">
+    <div class="profile-details">
+      <div class="profile-avatar">
+        <%= image_tag(@profile.avatar.url, class: "rounded-circle", size: '100x100') %>
+      </div>
+
+      <div class="details">
+        <p><strong>ユーザー名:</strong> <%= @profile.username %></p>
+        <p><strong>誕生日:</strong> <%= @profile.date_of_birth %></p>
+        <p><strong>性別:</strong> <%= t("genders.#{@profile.gender}") %></p>
+      </div>
+    </div>
+
+      <div class="actions">
+        <%= link_to 'プロフィール編集', edit_profile_path(@profile), class: "btn btn-primary" %>
+        <%= link_to 'ユーザー情報編集', edit_user_registration_path, class: "btn btn-secondary" %>
+      </div>
+  </div>
+</div>

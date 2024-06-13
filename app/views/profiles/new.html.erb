@@ -1,0 +1,41 @@
+<div class="main-content-without-slidebar">
+
+<%= render 'shared/multi_step_indicator', steps: @steps, current_step: @current_step %>
+
+<div class="container">
+
+<%= form_with model: @profile, class: "new_profile" do |f| %>
+  <div class="avatar_field">
+    <%= image_tag(@profile.avatar.url, id: "avatar-preview", class: "rounded-circle mt-3 clickable-avatar", size: '100x100') %>
+    <%= f.label t('profile.new.image'), class: "form-label" %>
+    <%= f.file_field :avatar, id: 'profile_avatar', class: "form-control-avatar", style: "display: none;", onchange: "updateAvatarPreview(this);" %>
+    <%= f.hidden_field :avatar_cache %>
+  </div>
+  <div class="field">
+    <%= f.label t('profile.new.username'), class: "form-label" %>
+    <%= f.text_field :username, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label t('profile.new.birthday'), class: "form-label" %>
+    <div class="date_field">
+    <%= f.date_select :date_of_birth, {
+        start_year: Date.current.year - 15,
+        end_year: Date.current.year - 100,
+        include_blank: true,
+        use_two_digit_numbers: true,
+        order: [:year, :month, :day]
+      }, class: "date-select" %>
+    </div>
+  </div>
+  <div class="field">
+    <%=f.label t('profile.new.gender'), class: "form-label" %>
+    <%=f.select :gender, Profile.genders.keys.map { |gender| [I18n.t("genders.#{gender}"), gender] }, { include_blank: true }, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit t('profile.new.submit'), class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+</div>
+</div>
+

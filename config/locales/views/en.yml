@@ -1,0 +1,199 @@
+en:
+  genders:
+      not_specified: Not specified
+      male: Male
+      female: Female
+      other: Other
+  pet_genders:
+      not_specified: Unknown
+      male: Male
+      female: Female
+  categories:
+      snake: Snake
+      lizard: Lizard
+      gecko: Gecko
+      chameleon: Chameleon
+      turtle: Turtle
+      others: Others
+  steps:
+      profile: Register profile
+      pet: Register pet
+      food: Register food
+  helpers:
+    submit:
+      create: Create
+      submit: Save
+      update: Update
+    label:
+      email: Email
+      password: Password
+      password_confirmation: Password confirmation
+      remember_me: Remember me
+      next: Next
+  home:
+    welcome:
+      title: Greetingssss, human and reptile friends!
+      description: Stick out your tongues and taste the air of health with Repti track!
+      sign_up: Create an account and get started
+      sign_in: Already have an account?
+      go_to_questions_board: Go to the Forum now
+  profiles:
+    new:
+      username: Username
+      birthday: Birthday
+      image: Add image
+      gender: Gender
+      male: Male
+      female: Female
+      other: Other
+      submit: Go to pet registration
+      go_dashboard: Skip pet registration
+    edit:
+      username: Username
+      birthday: Birthday
+      image: Change image
+      gender: Gender
+      male: Male
+      female: Female
+      other: Other
+      submit: Save changes
+      goback: Go back
+  shared:
+    slidebar:
+      dashboard: Dashboard
+      pets: Pets
+      forum: Forum
+      profile: Account
+      logout: Log out
+      login: Log in
+  user_sessions:
+    new:
+      login: Log in
+      remember_me: Remember me
+      forgot_password: Forgot your password?
+      new_user: Create an account
+      login_with_google: Log in with Google
+      login_with_apple: Log in with Apple
+      goback: Go back
+    create:
+      success: Logged in successfully
+      alert: Incorrect email or password
+    destroy:
+      success: Logged out successfully
+  users:
+    new:
+      sign_up: Sign up
+      email: Email
+      password: Password
+      min: characters minimum
+      password_confirmation: Password confirmation
+      submit: Create account
+      already_have_an_account: Already have an account?
+      sign_in_with_google: Sign in with Google
+      sign_in_with_apple: Sign in with Apple
+      or: or
+    create:
+      success: Account created successfully
+    edit:
+      new_email: New email
+      new_email_confirmation: New email confirmation
+      new_password: New password
+      new_password_confirmation: New password confirmation
+      submit: Save changes
+      goback: Go back
+  dashboard:
+    index:
+      record: Record
+      weight: Body weight
+      last_weight: Last record
+      edit: Edit
+      today_weight: Today's weight
+      record_weight: Record weight
+      calendar: Calendar
+      year: /
+      month: /
+      record_care: Record care
+    edit_weight:
+      edit_weight: Edit weight
+      date: Date to edit
+      weight: Weight
+      submit: Edit
+      goback: Go back
+    care:
+      date: Care date
+      food: Food
+      amount_of_food: Amount of food
+      excrament: Excrement
+      bath: Bathing
+      shed: Shedding
+      lay_eggs: Laying eggs
+      mate: Mating
+      add_photo: Add photo
+      submit: Record care
+  forum:
+    header:
+      search: Search
+      create: Create
+    index:
+      latest: New
+      popular: Top
+      username: Username
+      when: Date
+    show:
+      when: Date
+      latest: New
+      popular: Top
+      oldest: Old
+      answer: Write an answer
+    new:
+      title: Title
+      content: Content
+      image: Image
+      save_as_draft: Save Draft
+      submit: Post
+      goback: Go back
+    edit:
+      cancel: Cancel
+      submit: Save
+    answer:
+      submit: Post
+    destroy:
+      confirm: Are you sure you want to delete this?
+      warning: This action cannot be undone.
+      cancel: Cancel
+      delete: Delete
+  pets:
+    new:
+      image: Add image
+      pet_name: Pet's name
+      category: Category
+      breed: Breed
+      birthday: Birthday
+      not_sure: If you are not sure, please fill in the approximate date.
+      year: yyyy
+      month: mm
+      day: dd
+      gender: Sex
+      food: Food
+      what_it_eats: What is your pet's favorite food?
+      addmore: Add more
+      addpet: Add more pets
+      submit: Register
+      goback: Go back
+      next: Next
+    index:
+      addpet: Add more pets
+      born: Birthday
+      edit: Edit
+      slash: /
+    edit:
+      image: Change image
+      submit: Save
+      goback: Go back
+      delete: Delete this pet
+    destroy:
+      confirm: Are you sure?
+      warning: This action cannot be undone.
+      warning2: All records related to this pet will be deleted.
+      cancel: Cancel
+      delete: Delete

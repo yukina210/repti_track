@@ -1,0 +1,231 @@
+@import "bootstrap";
+@import "welcome";
+@import "slidebar";
+@import "form";
+@import "multi_step";
+@import "select2";
+@import "pets";
+@import "forum";
+@import "profiles";
+@import "calendar";
+
+@import url('https://fonts.googleapis.com/css2?family=Kaisei+Opti&family=Kiwi+Maru&family=M+PLUS+Rounded+1c&display=swap');
+
+// Variables
+$slidebar-width: 243px;
+$main-content-padding: 20px;
+$record-field-width: calc(50% - #{$main-content-padding / 2});
+
+body {
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    background-color: #F6F6F2;
+}
+
+.chart-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  
+    .form-group-main {
+      margin-right: 10px;
+    }
+  
+    .form-control-main {
+      width: 200px;
+    }
+  
+    .btn-primary-main {
+      margin-top: 25px;
+    }
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+}
+
+.form-group > * {
+    margin: 0 10px;
+}
+
+.pet-selection {
+  margin-left: $slidebar-width + $main-content-padding;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  .pet-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    margin-left: 30px;
+  }
+
+  .btn-pet-selection {
+    margin-bottom: 20px;
+    border-radius: 40px;
+    background-color: #388087;
+    color: white;
+    margin-top: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        background-color: #2a5a66; // darker shade of the original color
+        transform: scale(1.05); // slightly enlarge the button
+    }
+  }
+}
+
+.main-content {
+    margin-left: $slidebar-width + $main-content-padding;
+    padding: $main-content-padding;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .record_field {
+        width: $record-field-width;
+        padding: $main-content-padding;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #FFFFFF;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .line_chart {
+        width: 100%;
+        height: auto;
+        margin-top: 45px;
+    }
+
+    #chart-1 {
+        width: 100%;
+        height: 420px;
+        margin-bottom: 45px;
+    }
+
+    .cart-button {
+      margin-top: 65px;
+    }
+
+    .btn-primary-main {
+        background-color: #388087;
+        color: white;
+        border-radius: 40px;
+        margin-top: 15px;
+
+        &:hover {
+            background-color: #2a5a66;
+            transform: scale(1.05);
+        }
+    }
+}
+
+.field_header {
+  color: #388087;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.calendar-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.calendar {
+  position: relative;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+}
+
+.calendar table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar th,
+.calendar td {
+  border: 1px solid #dcdcdc;
+  width: 14.28%;
+  height: 80px; // 高さを少し小さくする
+  vertical-align: top;
+  position: relative;
+  background-color: #fff;
+}
+
+.calendar th {
+  background-color: #6FB3B8;
+  text-align: center;
+  padding: 5px;
+  height: 40px; // 曜日のボックスの高さを小さくする
+}
+
+.calendar-date {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.date-number {
+  font-weight: bold;
+  padding: 5px;
+  color: #333;
+  text-align: center;
+}
+
+.date-number a {
+  text-decoration: none; // ここで下線を削除
+  color: inherit; // リンクの色を継承
+}
+
+.calendar-icon {
+  width: 20px;
+  height: 20px;
+  margin: 2px auto;
+  display: block;
+}
+
+.main-content-without-slidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+      margin-left: 0; // モバイルでは左のマージンを削除
+      padding: 10px; // 少しパディングを加える
+      align-items: center; // アイテムを中央揃えに
+      display: flex;
+      flex-direction: column; // アイテムを縦に並べる
+
+      .record_field {
+        width: 90%; // レコードフィールドの幅を100%に設定
+        margin-top: 10px; // トップにマージンを追加
+    }
+  }
+
+  .pet-selection {
+    margin-left: 45px;
+    margin-top: 30px;
+  }
+
+  .form-control-main, .btn-pet-selection {
+      width: 100%; // フォームコントロールとボタンの幅を100%に設定
+  }
+
+  .chart-controls, .form-group {
+      flex-direction: column; // チャートコントロールとフォームグループを縦に並べる
+  }
+}
