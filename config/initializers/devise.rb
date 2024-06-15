@@ -40,7 +40,7 @@ Devise.setup do |config|
 
   config.sign_out_via = :delete
 
-  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], {}
+  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], { skip_jwt: true }
 
   # config.omniauth :apple,
 
