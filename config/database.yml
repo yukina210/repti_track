@@ -2,9 +2,10 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['POSTGRES_USER'] %>  # 環境変数を使用
-  password: <%= ENV['POSTGRES_PASSWORD'] %>  # 環境変数を使用
-  host: db
+  username: <%= ENV['POSTGRES_USER'] %>  # RDSデータベースのユーザー名
+  password: <%= ENV['POSTGRES_PASSWORD'] %>  # RDSデータベースのパスワード
+  host: <%= ENV['POSTGRES_HOST'] %>  # RDSデータベースのエンドポイント
+  port: <%= ENV['POSTGRES_PORT'] %>  # RDSデータベースのポート
 
 development:
   <<: *default
