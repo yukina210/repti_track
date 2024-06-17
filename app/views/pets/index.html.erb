@@ -19,7 +19,8 @@
         <%= image_tag pet.pet_avatar.url, class: "pet-avatar" %>
         <h2><%= pet.pet_name %></h2>
         <p><%= pet.breed %></p>
-        <p><%= gender_in_japanese(pet.gender) %></p>
+        <p><%= pet.gender_i18n %></p>
+        <p><%= pet.category_i18n %></p>
         <p><%= pet.date_of_birth.strftime("%Y年%m月%d日生まれ") %></p>
         <div class="buttons">
             <%= link_to(edit_pet_path(pet), class: "btn btn-secondary") do %>

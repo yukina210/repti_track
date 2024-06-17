@@ -238,7 +238,7 @@ ja:
       year: 年
       month: 月
       day: 日
-      not_sure: 不明な場合はおおよその日付をご入力ください
+      birthday_hint: 正確な日付がわからない場合は、推測で入力してください。
       gender: 性別
       food: ごはん
       what_it_eats: いつも食べているもの

@@ -7,7 +7,7 @@ class PetsController < ApplicationController
       if params[:search].present?
         normalized_search = normalize_search_query(params[:search])
         search_terms = normalized_search.split(' ')
-        conditions = search_terms.map { |term| '(pet_name LIKE ? OR category LIKE ? OR gender LIKE ? OR breed LIKE ?)' }.join(' AND ')
+        conditions = search_terms.map { |term| '(pet_name LIKE ? OR category::text LIKE ? OR gender::text LIKE ? OR breed LIKE ?)' }.join(' AND ')
         values = search_terms.map { |term| ["%#{term}%", "%#{term}%", "%#{term}%", "%#{term}%"] }.flatten
         @pets = @pets.where(conditions, *values)
       end
@@ -16,11 +16,31 @@ class PetsController < ApplicationController
     def autocomplete
       normalized_search = normalize_search_query(params[:query])
       search_terms = normalized_search.split(' ')
-      conditions = search_terms.map { |term| '(pet_name LIKE ? OR category LIKE ? OR gender LIKE ? OR breed LIKE ?)' }.join(' AND ')
+      conditions = search_terms.map { |term| '(pet_name LIKE ? OR category::text LIKE ? OR gender::text LIKE ? OR breed LIKE ?)' }.join(' AND ')
       values = search_terms.map { |term| ["%#{term}%", "%#{term}%", "%#{term}%", "%#{term}%"] }.flatten
       results = current_user.pets.where(conditions, *values).pluck(:pet_name, :category, :gender, :breed).uniq
       render json: results.flatten
     end
+
+    # def index
+    #   @pets = current_user.pets
+    #   if params[:search].present?
+    #     normalized_search = normalize_search_query(params[:search])
+    #     search_terms = normalized_search.split(' ')
+    #     conditions = search_terms.map { |term| '(pet_name LIKE ? OR category LIKE ? OR gender LIKE ? OR breed LIKE ?)' }.join(' AND ')
+    #     values = search_terms.map { |term| ["%#{term}%", "%#{term}%", "%#{term}%", "%#{term}%"] }.flatten
+    #     @pets = @pets.where(conditions, *values)
+    #   end
+    # end
+
+    # def autocomplete
+    #   normalized_search = normalize_search_query(params[:query])
+    #   search_terms = normalized_search.split(' ')
+    #   conditions = search_terms.map { |term| '(pet_name LIKE ? OR category LIKE ? OR gender LIKE ? OR breed LIKE ?)' }.join(' AND ')
+    #   values = search_terms.map { |term| ["%#{term}%", "%#{term}%", "%#{term}%", "%#{term}%"] }.flatten
+    #   results = current_user.pets.where(conditions, *values).pluck(:pet_name, :category, :gender, :breed).uniq
+    #   render json: results.flatten
+    # end
 
     def new
       @pet = current_user.pets.build

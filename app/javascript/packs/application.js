@@ -271,6 +271,31 @@ document.addEventListener("turbo:load", function() {
   }
 });
 
+// Event Image upload
+document.addEventListener("turbo:load", function() {
+  var fileInputs = document.querySelectorAll('.file-input');
+  var imagePreviews = document.querySelectorAll('.image-upload');
+
+  fileInputs.forEach((fileInput, index) => {
+    var imagePreview = imagePreviews[index];
+
+    imagePreview.addEventListener('click', function() {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener('change', function() {
+      if (fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          imagePreview.src = e.target.result;
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      }
+    });
+  });
+});
+
+
 // Event Image upload preview and removal
 document.addEventListener("turbo:load", function() {
   var fileInputs = document.querySelectorAll('.file-input');
@@ -349,7 +374,7 @@ document.addEventListener("turbo:load", function() {
   }
 });
 
-// Question Image upload preview and removal
+// Question Image upload
 document.addEventListener("turbo:load", function() {
   var fileInputs = document.querySelectorAll('.file-input');
   var imagePreviews = document.querySelectorAll('.image-upload');
@@ -399,6 +424,9 @@ document.addEventListener("turbo:load", function() {
           } else {
             console.error('Failed to remove image');
           }
+        })
+        .catch(error => {
+          console.error('Error:', error);
         });
       });
     });
@@ -406,6 +434,64 @@ document.addEventListener("turbo:load", function() {
     // console.error('Question container not found');
   }
 });
+
+// // Question Image upload preview and removal
+// document.addEventListener("turbo:load", function() {
+//   var fileInputs = document.querySelectorAll('.file-input');
+//   var imagePreviews = document.querySelectorAll('.image-upload');
+//   var questionContainer = document.querySelector('.new-question-container');
+
+//   if (questionContainer) {
+//     var questionId = questionContainer.getAttribute('data-question-id');
+//     console.log('Question container found with ID:', questionId);
+
+//     fileInputs.forEach((fileInput, index) => {
+//       var imagePreview = imagePreviews[index];
+
+//       imagePreview.addEventListener('click', function() {
+//         fileInput.click();
+//       });
+
+//       fileInput.addEventListener('change', function() {
+//         if (fileInput.files && fileInput.files[0]) {
+//           var reader = new FileReader();
+//           reader.onload = function(e) {
+//             imagePreview.src = e.target.result;
+//           };
+//           reader.readAsDataURL(fileInput.files[0]);
+//         }
+//       });
+//     });
+
+//     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+//     document.querySelectorAll('.remove-icon').forEach((icon) => {
+//       icon.addEventListener('click', function() {
+//         var index = this.getAttribute('data-index');
+//         console.log('Removing image at index:', index);
+//         fetch(`/questions/${questionId}/remove_image?index=${index}`, {
+//           method: 'DELETE',
+//           headers: {
+//             'X-CSRF-Token': csrfToken,
+//             'Content-Type': 'application/json'
+//           },
+//           redirect: 'follow'
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//           if (data.status === 'success') {
+//             imagePreviews[index].src = '/assets/forum_default_image.png';
+//             fileInputs[index].value = '';
+//           } else {
+//             console.error('Failed to remove image');
+//           }
+//         });
+//       });
+//     });
+//   } else {
+//     // console.error('Question container not found');
+//   }
+// });
 
 // Answer textarea expansion
 document.addEventListener("turbo:load", function() {

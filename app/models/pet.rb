@@ -15,4 +15,12 @@ class Pet < ApplicationRecord
   validates :gender, presence: true, inclusion: { in: genders.keys }
   validates :category, presence: true, inclusion: { in: Pet.categories.keys }
   validates :breed, presence: true
+
+  def category_i18n
+    I18n.t("categories.#{category}")
+  end
+
+  def gender_i18n
+    I18n.t("pet_genders.#{gender}")
+  end
 end
