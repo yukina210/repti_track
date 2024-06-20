@@ -34,7 +34,7 @@
         <% image = @event.images[i] || OpenStruct.new(url: asset_path('forum_default_image.png')) %>
         <div class="image-wrapper">
           <%= image_tag image.url, class: 'image-upload', id: "image-preview-#{i + 1}" %>
-          <%= form.file_field :images, multiple: true, id: "file-input-#{i + 1}", class: 'file-input', style: 'display: none;' %>
+          <%= form.file_field :images, name: "event[images][]", id: "file-input-#{i + 1}", class: 'file-input', style: 'display: none;' %>
           <% if @event.images[i] %>
             <i class="fas fa-trash-alt remove-icon" data-index="<%= i %>"></i>
           <% end %>

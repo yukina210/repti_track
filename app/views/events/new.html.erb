@@ -1,5 +1,5 @@
 <div class="main-content-without-slidebar">
-<div class="container">
+<div class="container new-event-container" data-pet-id="<%= @pet.id %>">
 
 <h1><%= t('dashboard.care.care') %></h1>
 <%= form_with(model: [@pet, @event], local: true, multipart: true) do |form| %>

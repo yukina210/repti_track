@@ -1,11 +1,11 @@
 <div class="main-content-without-slidebar">
 <div class="container">
 
-<%= form_with model: @pet, local: true, class: "new_pet" do |f| %>
+<%= form_with model: @pet, local: true, class: "new_pet", html: { multipart: true } do |f| %>
   <div class="avatar_field">
     <%= image_tag(@pet.pet_avatar.url, id: "avatar-preview", class: "rounded-circle mt-3 clickable-avatar", size: '100x100') %>
     <%= f.label t('pets.new.image'), class: "form-label" %>
-    <%= f.file_field :pet_avatar, id: 'profile_avatar', class: "form-control-avatar", style: "display: none;", onchange: "updateAvatarPreview(this);" %>
+    <%= f.file_field :pet_avatar, id: 'pet_avatar', class: "form-control-avatar", style: "display: none;" %>
     <%= f.hidden_field :pet_avatar_cache %>
   </div>
 

@@ -77,7 +77,7 @@ module.exports = function(api) {
           async: false
         }
       ],
-      '@babel/plugin-proposal-optional-chaining',
+      '@babel/plugin-proposal-optional-chaining', // 追加されたプラグイン
       '@babel/plugin-proposal-nullish-coalescing-operator'
     ].filter(Boolean)
   };

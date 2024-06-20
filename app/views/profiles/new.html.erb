@@ -6,9 +6,9 @@
 
 <%= form_with model: @profile, class: "new_profile" do |f| %>
   <div class="avatar_field">
-    <%= image_tag(@profile.avatar.url, id: "avatar-preview", class: "rounded-circle mt-3 clickable-avatar", size: '100x100') %>
+    <%= image_tag(@profile.avatar.url, id: "profile_avatar_preview", class: "rounded-circle mt-3 clickable-avatar", size: '100x100') %>
     <%= f.label t('profile.new.image'), class: "form-label" %>
-    <%= f.file_field :avatar, id: 'profile_avatar', class: "form-control-avatar", style: "display: none;", onchange: "updateAvatarPreview(this);" %>
+    <%= f.file_field :avatar, id: 'profile_avatar_input', class: "form-control-avatar", style: "display: none;" %>
     <%= f.hidden_field :avatar_cache %>
   </div>
   <div class="field">
@@ -38,4 +38,3 @@
 
 </div>
 </div>
-

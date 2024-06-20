@@ -2,9 +2,9 @@
   <div class="container">
     <%= form_with model: @profile, url: profile_path(@profile), method: :put, local: true, class: "edit_profile" do |f| %>
       <div class="avatar_field">
-        <%= image_tag(@profile.avatar.url, id: "avatar-preview", class: "rounded-circle mt-3 clickable-avatar", size: '100x100') %>
+        <%= image_tag(@profile.avatar.url, id: "profile_avatar_preview", class: "rounded-circle mt-3 clickable-avatar", size: '100x100') %>
         <%= f.label t('profile.edit.image'), class: "form-label" %>
-        <%= f.file_field :avatar, id: 'profile_avatar', class: "form-control-avatar", style: "display: none;", onchange: "updateAvatarPreview(this);" %>
+        <%= f.file_field :avatar, id: 'profile_avatar_input', class: "form-control-avatar", style: "display: none;" %>
         <%= f.hidden_field :avatar_cache %>
       </div>
 
@@ -37,30 +37,3 @@
     <% end %>
   </div>
 </div>
-
-<script>
-  document.addEventListener("turbo:load", function() {
-    var avatarPreview = document.getElementById('avatar-preview');
-    var fileInput = document.getElementById('profile_avatar');
-
-    if (avatarPreview && fileInput) {
-      avatarPreview.addEventListener('click', function() {
-        fileInput.click();
-      });
-
-      fileInput.onchange = function() {
-        updateAvatarPreview(this);
-      };
-
-      function updateAvatarPreview(input) {
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function(e) {
-            avatarPreview.src = e.target.result;
-          };
-          reader.readAsDataURL(input.files[0]);
-        }
-      }
-    }
-  });
-</script>

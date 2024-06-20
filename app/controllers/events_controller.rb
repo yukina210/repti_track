@@ -43,10 +43,22 @@ class EventsController < ApplicationController
     event_params_copy.delete(:images)
   
     if @event.update(event_params_copy)
-      redirect_to dashboard_path(selected_pet_id: @pet.id)
+      respond_to do |format|
+        format.html { redirect_to dashboard_path(selected_pet_id: @pet.id) }
+        format.json { render json: { status: 'success' } }
+      end
     else
-      render :edit
+      respond_to do |format|
+        format.html { render :edit }
+        format.json { render json: { status: 'error' }, status: :unprocessable_entity }
+      end
     end
+
+    # if @event.update(event_params_copy)
+    #   redirect_to dashboard_path(selected_pet_id: @pet.id)
+    # else
+    #   render :edit
+    # end
   end
 
 

@@ -102,15 +102,19 @@ class QuestionsController < ApplicationController
 
   def remove_image
     index = params[:index].to_i
+    logger.debug "Attempting to remove image at index: #{index} from question ID: #{@question.id}"
     if index >= 0 && index < @question.images.length
       @question.images.delete_at(index)
       @question.images_will_change!
       if @question.save
+        logger.debug "Successfully removed image at index: #{index}"
         render json: { status: 'success' }
       else
+        logger.error "Failed to save question after removing image"
         render json: { status: 'error' }, status: :unprocessable_entity
       end
     else
+      logger.error "Invalid index for image removal: #{index}"
       render json: { status: 'error' }, status: :unprocessable_entity
     end
   end

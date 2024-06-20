@@ -25,9 +25,6 @@
         <%= image_tag 'account.png', size: '16x16' %>
         <%= link_to t('shared.slidebar.profile'), profile_path(current_user.profile), class: 'navigation-link' %>
       </li>
-      <li class="navigation-item">
-        <%= link_to t('shared.slidebar.logout'), destroy_user_session_path, method: :delete, class: 'navigation-link' %>
-      </li>
     <% else %>
       <li class="navigation-item">
         <%= link_to t('shared.slidebar.login'), new_user_session_path, class: 'navigation-link' %>

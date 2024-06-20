@@ -1,5 +1,8 @@
 {
   "license": "MIT",
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^7.0.0",
@@ -11,9 +14,8 @@
     "chartjs-adapter-date-fns": "^3.0.0",
     "chartkick": "^5.0.1",
     "core-js": "3",
-    "date-fns": "^3.6.0",
+    "date-fns": "^2.16.1",
     "dotenv": "^16.4.5",
-    "fsevents": "^2.3.3",
     "jquery": "^3.7.1",
     "jquery-ui": "^1.13.3",
     "select2": "^4.1.0-rc.0",
@@ -30,5 +32,8 @@
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.3"
   }
 }

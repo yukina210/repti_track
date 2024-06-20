@@ -1,17 +1,7 @@
+# Azure 開発環境用の設定
 version: '3.8'
 
 services:
-  db:
-    image: postgres:14
-    environment:
-      POSTGRES_DB: reptitrack
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5433:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
   web:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
@@ -19,20 +9,40 @@ services:
       - .:/rails
     ports:
       - "3000:3000"
+    env_file:
+      - .env
     depends_on:
       - db
+
+  db:
+    image: postgres:14
     environment:
-      DATABASE_URL: postgres://myuser:password@db:5432/myapp_development
-      RAILS_ENV: development
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:
 
-
-# Azure Database for PostgreSQL使用の場合
+# # ローカル
 # version: '3.8'
 
 # services:
+#   db:
+#     image: postgres:14
+#     environment:
+#       POSTGRES_DB: reptitrack
+#       POSTGRES_USER: myuser
+#       POSTGRES_PASSWORD: password
+#     ports:
+#       - "5433:5432"
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+
 #   web:
 #     build: .
 #     command: bundle exec rails s -p 3000 -b '0.0.0.0'
@@ -40,40 +50,10 @@ volumes:
 #       - .:/rails
 #     ports:
 #       - "3000:3000"
-#     environment:
-#       DATABASE_URL: postgres://yukina21053:Jbus0911@repti-track-server.private.postgres.database.azure.com:5432/myapp_development
-#       RAILS_ENV: development
-
-# volumes:
-#   postgres_data:
-
-# AWS RDS使用の場合
-# version: '3.8'
-
-# services:
-#   db:
-#     image: postgres
-#     platform: linux/arm64/v8
-#     volumes:
-#       - postgres_data:/var/lib/postgresql/data
-#     environment:
-#       POSTGRES_DB: myapp_development
-#       POSTGRES_USER: myuser
-#       POSTGRES_PASSWORD: mypassword
-#     ports:
-#       - "5433:5432"  # ポートを5432から5433に変更
-
-#   web:
-#     build: .
-#     command: bundle exec rails s -p 3000 -b '0.0.0.0'  # コマンドを修正
-#     volumes:
-#       - .:/rails
-#     ports:
-#       - "3000:3000"
 #     depends_on:
 #       - db
 #     environment:
-#       DATABASE_URL: postgres://myuser:mypassword@db:5432/myapp_development # ポート番号も変更
+#       DATABASE_URL: postgres://myuser:password@db:5432/myapp_development
 #       RAILS_ENV: development
 
 # volumes:

@@ -49,6 +49,7 @@ class PetsController < ApplicationController
 
     def create
         @pet = current_user.pets.new(pet_params)
+        logger.debug "Pet params: #{pet_params.inspect}"
         if @pet.save
           redirect_to dashboard_path
         else

@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development', // 追加: 開発モードを設定
+  mode: 'development',
   entry: './app/javascript/packs/application.js',
   output: {
     filename: 'main.js',

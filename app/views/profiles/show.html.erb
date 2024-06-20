@@ -18,5 +18,9 @@
         <%= link_to 'プロフィール編集', edit_profile_path(@profile), class: "btn btn-primary" %>
         <%= link_to 'ユーザー情報編集', edit_user_registration_path, class: "btn btn-secondary" %>
       </div>
+
+      <li class="navigation-item">
+        <%= link_to t('shared.slidebar.logout'), destroy_user_session_path, method: :delete, class: 'navigation-link' %>
+      </li>
   </div>
 </div>
