@@ -68,6 +68,10 @@ group :test do
   gem "selenium-webdriver"
 end
 
+group :development do
+  gem 'letter_opener'
+end
+
 gem 'sassc-rails'
 
 gem 'sassc'
@@ -104,6 +108,6 @@ gem 'turbolinks', '~> 5'
 
 gem "omniauth-rails_csrf_protection"
 
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', groups: [:development, :test, :production]
 
 gem 'pg'

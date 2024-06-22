@@ -4,12 +4,13 @@
 ARG RUBY_VERSION=3.1.4
 
 # Rubyの公式イメージを使用（amd64プラットフォームを指定）
-FROM --platform=linux/amd64 registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+FROM --platform=linux/amd64 registry.docker.com/library/ruby:$RUBY_VERSION-slim AS base
 WORKDIR /rails
 
 # 必要なパッケージのインストール
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential libpq-dev postgresql-client curl gnupg2 && \
+    apt-get install --no-install-recommends -y build-essential libpq-dev curl && \
+    apt-get install -y gnupg2 && \
     curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get install -y nodejs=14.* && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -23,7 +24,9 @@ RUN apt-get update -qq && \
 COPY Gemfile Gemfile.lock ./
 
 # Bundlerのインストール
-RUN gem install bundler -v '2.4.13' && bundle install
+# RUN gem install bundler -v '2.4.13' && bundle install
+RUN gem install bundler -v '2.4.13'
+RUN bundle install
 
 # dotenvのインストール
 RUN gem install dotenv
@@ -36,7 +39,7 @@ RUN bundle exec rails webpacker:install
 RUN yarn install --check-files
 
 # アセットのプリコンパイル
-RUN RAILS_ENV=development bundle exec rake assets:precompile
+RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 # 非rootユーザーの作成
 RUN useradd rails --create-home --shell /bin/bash && \
@@ -46,12 +49,21 @@ USER rails
 # .envファイルをコピー
 COPY .env .env
 
+# 起動スクリプトのコピーと実行権限付与
+USER root
+COPY bin/docker-entrypoint /usr/bin/docker-entrypoint
+RUN chmod +x /usr/bin/docker-entrypoint
+
 # ポート3000を開放
 EXPOSE 3000
 
 # 起動スクリプト
-CMD bundle exec rails db:migrate && bundle exec rails server -b 0.0.0.0
+# CMD bundle exec rails db:migrate && bundle exec rails server -b 0.0.0.0
+ENTRYPOINT ["./bin/docker-entrypoint"]
+CMD ["rails", "server", "-e", "production", "-b", "0.0.0.0"]
 
+# 再度非rootユーザーに戻す
+USER rails
 
 
 # # syntax = docker/dockerfile:1

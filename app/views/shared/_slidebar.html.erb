@@ -17,13 +17,19 @@
         <%= image_tag 'reptile.png', size: '16x16' %>
         <%= link_to t('shared.slidebar.pets'), pets_path, class: 'navigation-link' %>
       </li>
-      <li class="navigation-item">
-        <%= image_tag 'qanda.png', size: '16x16' %>
-        <%= link_to t('shared.slidebar.forum'), questions_path, class: 'navigation-link' %>
-      </li>
+      <% if current_user.profile %>
+        <li class="navigation-item">
+          <%= image_tag 'qanda.png', size: '16x16' %>
+          <%= link_to t('shared.slidebar.forum'), questions_path, class: 'navigation-link' %>
+        </li>
+      <% end %>
       <li class="navigation-item">
         <%= image_tag 'account.png', size: '16x16' %>
-        <%= link_to t('shared.slidebar.profile'), profile_path(current_user.profile), class: 'navigation-link' %>
+        <% if current_user.profile %>
+          <%= link_to t('shared.slidebar.profile'), profile_path(current_user.profile), class: 'navigation-link' %>
+        <% else %>
+          <%= link_to t('shared.slidebar.create_profile'), new_profile_path, class: 'navigation-link' %>
+        <% end %>
       </li>
     <% else %>
       <li class="navigation-item">

@@ -51,7 +51,7 @@ class PetsController < ApplicationController
         @pet = current_user.pets.new(pet_params)
         logger.debug "Pet params: #{pet_params.inspect}"
         if @pet.save
-          redirect_to dashboard_path
+          redirect_to pets_path
         else
           render :new, status: :unprocessable_entity
         end

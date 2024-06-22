@@ -3,17 +3,14 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-
+  before_action :set_steps, only: [:new, :create]
   # GET /resource/sign_up
   def new
-    super do |resource|
-      @steps = [
-        t('steps.profile'),
-        t('steps.pet'),
-        t('steps.food')
-      ]
-      @current_step = 1
-    end
+    super
+  end
+
+  def create
+    super
   end
 
   # POST /resource
@@ -37,6 +34,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   protected
+
+  def set_steps
+    @steps = [
+      t('steps.profile'),
+      t('steps.pet'),
+      t('steps.food')
+    ]
+    @current_step = 1
+  end
 
   # Redirect to the user's profile page after sign up.
   def after_sign_up_path_for(resource)

@@ -10,7 +10,7 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
 
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = ENV['GMAIL_USERNAME']
 
   require 'devise/orm/active_record'
 
@@ -48,4 +48,7 @@ Devise.setup do |config|
   config.responder.redirect_status = :see_other
 
   config.scoped_views = true
+
+  config.mailer = 'Devise::Mailer'
+  config.parent_mailer = 'ActionMailer::Base'
 end

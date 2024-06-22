@@ -18,8 +18,7 @@ test:
   database: myapp_test  # テスト用データベース名
 
 production:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   pool: 5
   database: <%= ENV['DATABASE_NAME'] %>  # 環境変数から取得
   username: <%= ENV['DATABASE_USER'] %>

@@ -46,7 +46,10 @@
   <div class="actions">
     <%= f.submit t('pets.new.submit'), class: "btn btn-primary" %>
   </div>
-
+  
+  <div class="actions">
+    <%= link_to t('pets.new.back_to_list'), pets_path, class: "btn btn-secondary" %>
+  </div>
 <% end %>
 
 </div>

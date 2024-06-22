@@ -1,9 +1,13 @@
 <%= render 'shared/slidebar' %>
 
   <div class="pet-selection">
-    <%= form_with url: dashboard_path, method: :get, local: true do %>
-      <%= select_tag :selected_pet_id, options_from_collection_for_select(@pets, :id, :pet_name, @selected_pet&.id), prompt: "ペットを選択", class: "form-control" %>
-      <%= submit_tag "表示", class: "btn btn-pet-selection" %>
+    <% if @pets.present? %>
+      <%= form_with url: dashboard_path, method: :get, local: true do %>
+        <%= select_tag :selected_pet_id, options_from_collection_for_select(@pets, :id, :pet_name, @selected_pet&.id), prompt: "ペットを選択", class: "form-control" %>
+        <%= submit_tag "表示", class: "btn btn-pet-selection" %>
+      <% end %>
+    <% else %>
+      <p>表示するペットがまだいないようです。</p>
     <% end %>
 
     <% if @selected_pet %>
@@ -79,8 +83,6 @@
         <% end %>
       </div>
       <%= link_to t('dashboard.index.record_care'), new_pet_event_path(@selected_pet), class: 'btn btn-primary' %>
-    </div> 
-  <% else %>
-    <p>表示するペットを選択してください。</p>
+    </div>
   <% end %>
 </div>
