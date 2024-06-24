@@ -203,29 +203,177 @@ body {
 }
 
 @media (max-width: 768px) {
-  .main-content {
-      margin-left: 0; // モバイルでは左のマージンを削除
-      padding: 10px; // 少しパディングを加える
-      align-items: center; // アイテムを中央揃えに
-      display: flex;
-      flex-direction: column; // アイテムを縦に並べる
+    .main-content {
+        margin-left: 0; // モバイルでは左のマージンを削除
+        // padding: 10px; // 少しパディングを加える
+        align-items: center; // アイテムを中央揃えに
+        display: flex;
+        flex-direction: column; // アイテムを縦に並べる
+        width: 100%;
 
-      .record_field {
-        width: 90%; // レコードフィールドの幅を100%に設定
-        margin-top: 10px; // トップにマージンを追加
+        .record_field {
+          width: 95%; // レコードフィールドの幅を100%に設定
+          margin-bottom: 10px; // トップにマージンを追加
+      }
+
+      .btn-primary-main {
+          margin-top: 5px;
+          font-size: 14px;
+      }
+
+      .line_chart {
+        margin-top: 20px;
+      }
+
+      #chart-1 {
+        margin-bottom: 10px;
+      }
     }
+
+    .pet-selection {
+      margin-left: 20px;
+      margin-top: 30px;
+
+      .btn-pet-selection {
+        font-size: 14px;
+      }
+
+      .pet-avatar {
+        width: 80px;
+        height: 80px;
+        margin-left: 15px;
+      }
+    }
+
+    .form-control {
+      font-size: 18px;
+      height: 40px;
+    }
+
+    .form-control-main, .btn-pet-selection {
+        width: 100%; // フォームコントロールとボタンの幅を100%に設定
+    }
+
+    .field_header {
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+
+    .chart-controls, .form-group {
+        flex-direction: column; // チャートコントロールとフォームグループを縦に並べる
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .calendar table {
+      font-size: 10px;
+    }
+
+    .table > :not(caption) > * > * {
+      padding: 5px 4.5px;
+    }
+
+    .main-content-without-slidebar {
+      width: 100%;
+    }
+
+    .container {
+      width: 95%;
+      margin-top: 30px;
+      padding-top: 30px;
+    }
+
+    .field {
+      width: 100%;
+    }
+
+    .search-bar-forum {
+      margin-left: 0;
+      padding-top: 25px;
+      padding-bottom: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; // 要素間のスペースを均等に分配
+      padding-right: 100px;
+      align-items: center; // 要素を中央揃えに
+      flex-wrap: nowrap; // 要素を折り返さない
+    }
+
+    .search-field {
+      margin-left: 10px;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .search-input-forum {
+      max-width: 250px;
+      width: 70%;
+      height: 40px;
+    }
+
+    .btn-primary-forum {
+      flex-shrink: 0; // ボタンの縮小を防ぐ
+      height: 40px;
+      font-size: 14px;
+    }
+
+    .btn-create, .btn-secondary, .btn-notifications {
+      padding: 8px; // ボタンのパディングを調整
+      margin-left: 0px;
+      font-size: 17px;
+    }
+
+    .main-content-forum {
+      margin-left: 0; // 左マージンを削除
+      padding: 30px; // ページ全体のパディングを調整
+    }
+
+    .question-header, .question-footer {
+      align-items: center; // 要素を中央揃えに
+    }
+
+    .question-footer-contents {
+      flex-direction: column; // フッターのコンテンツを縦に並べる
+      align-items: center; // 中央揃え
+    }
+
+    .new-question-container {
+      width: 95%; // 幅を100%に設定
+      padding: 20px; // パディングを調整
+    }
+
+    .form-group-q {
+      margin-bottom: 10px; // フォームグループの下マージンを調整
+      font-size: 14px;
+    }
+
+    .container {
+      width: 95%;
   }
 
-  .pet-selection {
-    margin-left: 45px;
-    margin-top: 30px;
+  .field {
+      width: 100%;
+      font-size: 12px;
   }
 
-  .form-control-main, .btn-pet-selection {
-      width: 100%; // フォームコントロールとボタンの幅を100%に設定
+  .form_logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
   }
 
-  .chart-controls, .form-group {
-      flex-direction: column; // チャートコントロールとフォームグループを縦に並べる
+  .btn-primary {
+      width: 100%;
+      font-size: 20px;
+  }
+
+  .divider {
+      font-size: 14px;
+  }
+
+  .btn-api {
+      width: 100%;
+      height: 45px;
+      font-size: 20px;
   }
 }

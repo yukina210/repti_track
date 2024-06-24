@@ -107,7 +107,7 @@ ja:
     new:
       sign_up: アカウント作成
       email: メールアドレス
-      password: パスワード
+      password: パスワード（6文字以上）
       min: 文字以上
       password_confirmation: パスワード確認
       submit: アカウント作成

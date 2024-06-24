@@ -73,3 +73,13 @@
 .multi-step-indicator li.active:not(:last-child)::after {
   background: none;
 }
+
+@media (max-width: 768px) {
+  .multi-step-indicator {
+    font-size: 10px;
+  }
+
+  .multi-step-indicator ul {
+    width: 100%;
+  }
+}

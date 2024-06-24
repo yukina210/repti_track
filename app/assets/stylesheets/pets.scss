@@ -79,6 +79,22 @@ $record-field-width: calc(50% - #{$main-content-padding / 2});
 }
 
 @media (max-width: 768px) {
+  .search-bar {
+    height: 70px; // モバイルでは高さを縮小
+    justify-content: start;
+
+    .search-input {
+      padding: 6px 10px; // モバイルではパディングを縮小
+      border-radius: 10px;
+      margin-left: 10px;
+    }
+
+    .btn-primary-forum {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+  }
+
   .main-content-pets {
     margin-left: 0; // モバイルでは左のマージンを削除
     padding: 20px; // ページ全体のパディングを調整

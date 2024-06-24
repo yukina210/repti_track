@@ -50,6 +50,7 @@
 /* Set full width for mobile devices */
 @media (max-width: 768px) {
     .select2-container {
-        width: 100% !important; /* Make select2 full width on small screens */
+        width: 50% !important; /* Make select2 full width on small screens */
+        margin-left: 100px !important;
     }
 }

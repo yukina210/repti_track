@@ -96,6 +96,11 @@
 }
 
 @media (max-width: 768px) {
+    .welcome-header {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
     .logo {
         width: 150px;
         height: 150px;
@@ -145,16 +150,16 @@
 
     .graph {
         top: 0px;
-        margin-left: -70px;
-        max-width: 270px;
+        margin-left: -20px;
+        max-width: 230px;
         //transform: rotate(-5deg); // Slightly rotate the graph
         //z-index: 1; // Ensure graph is on top if overlapping
     }
 
     .statistics-preview .calendar {
-        right: -70px;
+        right: -20px;
         bottom: -150px;
-        max-width: 300px;
+        max-width: 250px;
         //transform: rotate(5deg); // Slightly rotate the calendar
     }
 }

@@ -42,6 +42,7 @@
   <div class="sorting-buttons">
     <%= link_to '新着順', questions_path(sort: 'newest'), class: "btn btn-sort #{'active' if params[:sort] == 'newest' || params[:sort].blank?}" %>
     <%= link_to '古い順', questions_path(sort: 'oldest'), class: "btn btn-sort #{'active' if params[:sort] == 'oldest'}" %>
+    <%= link_to '自分の投稿', questions_path(sort: 'my_posts'), class: "btn btn-sort #{'active' if params[:sort] == 'my_posts'}" %>
   </div>
 
   <% @questions.each do |question| %>

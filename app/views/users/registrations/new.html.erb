@@ -16,9 +16,6 @@
 
       <div class="field">
         <%= f.label t('users.new.password'), class: "form-label" %>
-        <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> <%= t('users.new.min') %>)</em>
-        <% end %>
         <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
       </div>
 

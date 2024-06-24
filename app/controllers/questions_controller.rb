@@ -18,6 +18,8 @@ class QuestionsController < ApplicationController
     @questions = case params[:sort]
                  when 'oldest'
                    @questions.order(created_at: :asc)
+                 when 'my_posts'
+                   @questions.where(user: current_user)
                  else
                    @questions.order(created_at: :desc)
                  end
@@ -68,8 +70,8 @@ class QuestionsController < ApplicationController
       @question.draft = false
       if @question.save
         respond_to do |format|
-          format.turbo_stream { redirect_to @question }
-          format.html { redirect_to @question, notice: '質問が投稿されました。' }
+          format.turbo_stream { redirect_to questions_path }
+          format.html { redirect_to questions_path, notice: '質問が投稿されました。' }
         end
       else
         render :new

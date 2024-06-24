@@ -365,9 +365,9 @@ $slidebar-width: 243px;
   .search-bar-forum {
     margin-left: 0;
     padding-top: 25px;
-    padding-bottom: 25px;
+    padding-bottom: 5px;
     display: flex;
-    flex-direction: row; // 要素を横一列に並べる
+    flex-direction: column;
     justify-content: space-between; // 要素間のスペースを均等に分配
     padding-right: 100px;
     align-items: center; // 要素を中央揃えに
@@ -376,19 +376,20 @@ $slidebar-width: 243px;
 
   .search-field {
     margin-left: 10px;
-    padding-left: 20px;
     display: flex;
-    flex-grow: 1; // 可変のスペースを割り当て、拡大を許可
     justify-content: flex-start;
-    margin-right: 10px; // 右隣の要素との間隔を設定
   }
 
   .search-input-forum {
     max-width: 250px;
+    width: 70%;
+    height: 40px;
   }
 
   .btn-primary-forum {
     flex-shrink: 0; // ボタンの縮小を防ぐ
+    height: 40px;
+    font-size: 14px;
   }
 
   .btn-create, .btn-secondary, .btn-notifications {
@@ -409,5 +410,24 @@ $slidebar-width: 243px;
   .question-footer-contents {
     flex-direction: column; // フッターのコンテンツを縦に並べる
     align-items: center; // 中央揃え
+  }
+
+  .new-question-container {
+    width: 95%; // 幅を100%に設定
+    padding: 20px; // パディングを調整
+  }
+
+  .form-group-q {
+    margin-bottom: 10px; // フォームグループの下マージンを調整
+    font-size: 14px;
+  }
+
+  .answer-edit-field {
+    margin-top: 20px; // 上マージンを調整
+    text-align: center;
+  }
+
+  .answer-content {
+    width: 300px; // 幅を100%に設定
   }
 }
