@@ -111,3 +111,5 @@ gem "omniauth-rails_csrf_protection"
 gem 'dotenv-rails', groups: [:development, :test, :production]
 
 gem 'pg'
+
+gem 'rack-cors'

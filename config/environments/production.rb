@@ -10,8 +10,8 @@ Rails.application.configure do
   config.assets.css_compressor = :sass
   config.assets.compile = false
   config.active_storage.service = :local
-  config.force_ssl = true
-  # config.force_ssl = false #本番環境テストのとき
+  # config.force_ssl = true
+  config.force_ssl = false #本番環境テストのとき
   config.logger = ActiveSupport::Logger.new(STDOUT)
     .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
     .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
