@@ -1,94 +1,70 @@
-module Api
-  module V1
-    class DashboardController < BaseController
-      before_action :authenticate_user!
-      before_action :set_pets
+# app/controllers/api/v1/dashboard_controller.rb
+class Api::V1::DashboardController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:index]
+  before_action :authenticate_user!
 
-      def weight_graph
-        if @pets.present?
-          @selected_pet = find_selected_pet
+  def index
+    @pets = current_user.pets
 
-          set_date_range(params[:time_range])
-          @weight_data = build_weight_data(@selected_pet)
+    if @pets.present?
+      @selected_pet = params[:selected_pet_id].present? ? current_user.pets.find(params[:selected_pet_id]) : @pets.first
 
-          render json: @weight_data
-        else
-          render json: { message: "No pets available" }, status: :not_found
+      # デフォルトの開始日と終了日を設定
+      @start_date = params[:start_date].present? ? Date.parse(params[:start_date]) : Date.today - 30.days
+      @end_date = params[:end_date].present? ? Date.parse(params[:end_date]) : Date.today
+
+      # グラフの表示期間を設定
+      @time_range = params[:time_range]
+
+      if @time_range.present?
+        case @time_range
+        when 'week'
+          @start_date = Date.today - 1.week
+        when 'month'
+          @start_date = Date.today - 1.month
+        when 'half_year'
+          @start_date = Date.today - 6.months
+        when 'year'
+          @start_date = Date.today - 1.year
+        when 'all'
+          @start_date = @selected_pet.weight_records.minimum(:date) || Date.today - 10.years
         end
       end
 
-      def care_calendar
-        if @pets.present?
-          @selected_pet = find_selected_pet
-
-          set_current_month_date_range
-          @events_by_date = build_events_by_date(@selected_pet)
-          render json: @events_by_date
-        else
-          render json: { message: "No pets available" }, status: :not_found
-        end
-      end
-
-      private
-
-      def set_pets
-        @pets = current_user.pets
-      end
-
-      def find_selected_pet
-        params[:selected_pet_id].present? ? current_user.pets.find(params[:selected_pet_id]) : @pets.first
-      end
-
-      def set_date_range(time_range)
-        @end_date = params[:end_date].present? ? Date.parse(params[:end_date]) : Date.today
-        @start_date = params[:start_date].present? ? Date.parse(params[:start_date]) : (@selected_pet.weight_records.minimum(:date) || Date.today - 90.days)
-        @start_date = [@start_date, @end_date - 90.days].max
-
-        if time_range.present?
-          case time_range
-          when 'week'
-            @start_date = Date.today - 1.week
-          when 'month'
-            @start_date = Date.today - 1.month
-          when 'half_year'
-            @start_date = Date.today - 6.months
-          when 'year'
-            @start_date = Date.today - 1.year
-          when 'all'
-            @start_date = @selected_pet.weight_records.minimum(:date) || Date.today - 10.years
+      # 体重データを取得
+      @weight_data = [
+        {
+          pet_id: @selected_pet.id,
+          name: @selected_pet.pet_name,
+          data: @selected_pet.weight_records.where(date: @start_date..@end_date).order(date: :asc).map do |record|
+            { x: record.date.strftime("%Y-%m-%d"), y: record.weight, id: record.id }
           end
-        end
+        }
+      ]
+
+      # カレンダー用イベントデータを取得（デフォルトは当月）
+      @calendar_start_date = Date.today.beginning_of_month
+      @calendar_end_date = Date.today.end_of_month
+
+      @events_by_date = initialize_records_hash
+      @selected_pet.events.where(date: @calendar_start_date..@calendar_end_date).each do |event|
+        @events_by_date[event.date] << event
       end
 
-      def set_current_month_date_range
-        current_date = Date.today
-        @start_date = current_date.beginning_of_month
-        @end_date = current_date.end_of_month
-      end
-
-      def build_weight_data(pet)
-        [
-          {
-            pet_id: pet.id,
-            name: pet.pet_name,
-            data: pet.weight_records.where(date: @start_date..@end_date).order(date: :asc).map do |record|
-              { x: record.date.strftime("%Y-%m-%d"), y: record.weight, id: record.id }
-            end
-          }
-        ]
-      end
-
-      def build_events_by_date(pet)
-        events_by_date = initialize_records_hash
-        pet.events.where(date: @start_date..@end_date).each do |event|
-          events_by_date[event.date] << event
-        end
-        events_by_date
-      end
-
-      def initialize_records_hash
-        Hash.new { |hash, key| hash[key] = [] }
-      end
+      render json: {
+        pets: @pets.as_json(only: [:id, :pet_name]),
+        selected_pet: @selected_pet.as_json(only: [:id, :pet_name]),
+        weight_data: @weight_data,
+        events_by_date: @events_by_date.transform_values { |events| events.map { |e| e.as_json(only: [:id, :date, :event_types, :note]) } }
+      }
+    else
+      render json: { message: 'No pets found' }, status: :not_found
     end
+  end
+
+  private
+
+  def initialize_records_hash
+    Hash.new { |hash, key| hash[key] = [] }
   end
 end

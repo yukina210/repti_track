@@ -66,32 +66,36 @@ Rails.application.routes.draw do
   # API routes
   namespace :api do
     namespace :v1 do
-      # devise_for :users, controllers: {
-      #   confirmations: 'api/v1/users/confirmations',
-      #   passwords: 'api/v1/users/passwords',
-      #   registrations: 'api/v1/users/registrations',
-      #   sessions: 'api/v1/users/sessions',
-      #   omniauth_callbacks: 'api/v1/users/omniauth_callbacks',
-      #   unlocks: 'api/v1/users/unlocks'
-      # }
+      devise_for :users, skip: [:sessions, :registrations, :omniauth_callbacks, :passwords], controllers: {
+        registrations: 'api/v1/registrations',
+        sessions: 'api/v1/sessions',
+        omniauth_callbacks: 'api/v1/omniauth_callbacks',
+        passwords: 'api/v1/passwords'
+      }
 
-      # devise_scope :user do
-      #   post '/users/auth/:provider', to: 'users/omniauth_callbacks#passthru', as: :user_omniauth_authorize
-      #   match '/users/auth/:provider/callback', to: 'users/omniauth_callbacks#google_oauth2', via: [:get, :post], as: :user_omniauth_callback
-      # end
+      devise_scope :user do
+        post '/users/sign_in', to: 'sessions#create', as: :api_v1_user_session
+        delete '/users/sign_out', to: 'sessions#destroy', as: :destroy_api_v1_user_session
+        post '/users', to: 'registrations#create', as: :api_v1_user_registration
+        post '/users/password', to: 'passwords#create', as: :api_v1_user_password
+        put '/users/password', to: 'passwords#update', as: :update_api_v1_user_password
+        post '/users/auth/:provider', to: 'omniauth_callbacks#passthru', as: :api_v1_user_omniauth_authorize
+        match '/users/auth/:provider/callback', to: 'omniauth_callbacks#google_oauth2', via: [:get, :post], as: :api_v1_user_omniauth_callback
+      end
 
-      resources :profiles, only: [:new, :create, :show, :edit, :update]
-      resources :pets, only: [:index, :new, :create, :edit, :update, :destroy, :show] do
+      resources :profiles, only: [:index, :show, :create, :update, :destroy]
+
+      resources :pets, only: [:index, :show, :create, :update, :destroy] do
         collection do
-          get :get_breeds
           get :autocomplete
         end
 
-        resources :weight_records, only: [:new, :create, :index, :edit, :update, :destroy]
-        resources :events, except: [:show, :index] do
+        resources :weight_records, only: [:index, :show, :create, :update, :destroy]
+
+        resources :events, only: [:index, :show, :create, :update, :destroy] do
           collection do
-            get 'show_by_date'
-            delete 'delete_by_date'
+            get 'date/:date', to: 'events#show_by_date', as: 'show_by_date'
+            delete 'date/:date', to: 'events#delete_by_date', as: 'delete_by_date'
           end
 
           member do
@@ -100,29 +104,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :questions do
-        member do
-          delete :remove_image
-        end
-
-        collection do
-          get :drafts
-          get :autocomplete
-        end
-
-        resources :answers, only: [:create, :edit, :update, :destroy] do
-          resource :like, only: [:create, :destroy]
-        end
-      end
-
-      resources :notifications, only: [:index, :show] do
-        patch 'mark_as_read', on: :member
-      end
-
-      get 'dashboard/weight_graph', to: 'dashboard#weight_graph'
-      get 'dashboard/care_calendar', to: 'dashboard#care_calendar'
-
-      get 'home/welcome', to: 'home#welcome'
+      get 'dashboard', to: 'dashboard#index'
     end
   end
 end
