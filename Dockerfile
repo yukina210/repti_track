@@ -4,7 +4,7 @@
 ARG RUBY_VERSION=3.1.4
 
 # Rubyの公式イメージを使用（amd64プラットフォームを指定）
-FROM --platform=linux/amd64 registry.docker.com/library/ruby:$RUBY_VERSION-slim AS base
+FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim AS base
 WORKDIR /rails
 
 # 必要なパッケージのインストール
