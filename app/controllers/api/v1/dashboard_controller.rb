@@ -1,8 +1,5 @@
 # app/controllers/api/v1/dashboard_controller.rb
-class Api::V1::DashboardController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:index]
-  before_action :authenticate_user!
-
+class Api::V1::DashboardController < Api::V1::BaseController
   def index
     @pets = current_user.pets
 

@@ -398,6 +398,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jquery-rails
+  jwt
   letter_opener
   omniauth
   omniauth-apple

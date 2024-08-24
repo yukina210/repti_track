@@ -113,3 +113,5 @@ gem 'dotenv-rails', groups: [:development, :test, :production]
 gem 'pg'
 
 gem 'rack-cors'
+
+gem 'jwt'

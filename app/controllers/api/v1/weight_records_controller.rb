@@ -1,7 +1,5 @@
 # app/controllers/api/v1/weight_records_controller.rb
-class Api::V1::WeightRecordsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
-  before_action :authenticate_user!
+class Api::V1::WeightRecordsController < Api::V1::BaseController
   before_action :set_pet, only: [:index, :create]
   before_action :set_weight_record, only: [:show, :update, :destroy]
 

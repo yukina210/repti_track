@@ -1,7 +1,5 @@
 # app/controllers/api/v1/profiles_controller.rb
-class Api::V1::ProfilesController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
-  before_action :authenticate_user!
+class Api::V1::ProfilesController < Api::V1::BaseController
   before_action :set_profile, only: [:show, :update, :destroy]
 
   # GET /api/v1/profiles

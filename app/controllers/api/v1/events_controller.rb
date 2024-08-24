@@ -1,7 +1,5 @@
 # app/controllers/api/v1/events_controller.rb
-class Api::V1::EventsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
-  before_action :authenticate_user!
+class Api::V1::EventsController < Api::V1::BaseController
   before_action :set_pet
   before_action :set_event, only: [:show, :update, :destroy, :remove_image]
 
